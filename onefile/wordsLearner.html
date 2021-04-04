@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Words Learner</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		body {
+			display: flex;
+			margin: 0px;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			--header-height--: 45px;
+		}
+		.page {
+			width: 100%;
+			height: 100%;
+			display: none;
+		}
+		.page-active {
+			display: flex;
+		}
+		.header {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: var(--header-height--);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: aquamarine;
+			user-select: none;
+		}
+		.btn-toPage {
+			position: absolute;
+			left: 0px;
+			display: block;
+			height: 35px;
+			width: 35px;
+			margin: 5px;
+			cursor: pointer;
+		}
+		.header-title {
+			font-size: medium;
+		}
+	</style>
+	<style>
+		.page-1 {
+			justify-content: center;
+			align-items: center;
+		}
+		.footer {
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			width: 100%;
+			min-height: 30px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background-color: aquamarine;
+			font-size: small;
+			text-align: center;
+		}
+
+		.testBlock {
+			position: relative;
+			width: 100%;
+			max-width: 400px;
+			/* min-height: 200px; */
+			background-color: aquamarine;
+			border: 2px solid green;
+			border-radius: 10px;
+		}
+		.testBlock-title1 {
+			font-size: xx-large;
+			text-align: center;
+			margin: 30px 10px 20px 10px;
+		}
+		.testBlock-title2 {
+			font-size: x-large;
+			text-align: center;
+			min-height: 30px;
+			margin: 20px 10px 20px 10px;
+		}
+		.testBlock-controls {
+			min-height: 50px;
+			display: flex;
+    		justify-content: center;
+    		align-items: center;
+		}
+		.testBlock-input {
+			font-size: 16px;
+			height: 24px;
+			outline: none;
+			/* outline-width: 1px; */
+    		/* outline-color: green; */
+			width: 45%;
+			border: 1px solid gray;
+			border-radius: 4px 0px 0px 4px;
+			border-right-color: grey !important;
+		}
+		.testBlock-input:disabled {
+			color: black;
+			background-color: transparent;
+		}
+		.input-correct, .input-uncorrect + .testBlock-OKbutton {
+			border-color: green;
+		}
+		.input-uncorrect, .input-uncorrect + .testBlock-OKbutton {
+			border-color: tomato;
+		}
+		.testBlock-OKbutton {
+			outline: none;
+			height: 24px;
+			width: 47px;
+			border: 1px solid gray;
+			border-left-width: 0px;
+			border-radius: 0px 4px 4px 0px;
+		}
+		.testBlock-input:focus, .testBlock-input:focus + .testBlock-OKbutton {
+			border-color: blue;
+		}
+		.testBlock-OKbutton:active {
+			box-shadow: inset 0px 0px 2px 0px black;
+		}
+		.testBlock-OKbutton:hover {
+			text-decoration: underline;
+		}
+		.testBlock-lbl {
+			position: absolute;
+			top: 0px;
+			margin: 5px;
+			font-size: medium;
+		}
+		.testBlock-lbl-all {
+			right: 0px;
+		}
+	</style>
+	<style>
+		.page-2 {
+			background-color: rgb(187, 250, 229);
+			justify-content: center;
+		}
+		.settings-body {
+			width: 100%;
+			max-width: 500px;
+			margin-top: var(--header-height--);
+			padding: 20px;
+		}
+		.settings-block {
+			display: flex;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.settings-text {
+			user-select: none;
+		}
+		.select {
+			margin-left: 10px;
+			min-width: 100px;
+		}
+	</style>
+</head>
+<body>
+    <noscript style="font-size: x-large;">Если вы видите это, попробуете открыть в Google Chrome</noscript>
+    <script>
+"use strict";
+const SVGs = {
+    settings: {
+        viewBox: "0 0 24 24", paths: [
+            "m13.12 24h-2.24c-.757 0-1.396-.567-1.486-1.32l-.239-1.876c-.477-.155-.937-.346-1.374-.569l-1.494 1.161c-.606.469-1.459.415-1.985-.126l-1.575-1.575c-.537-.521-.591-1.374-.122-1.979l1.161-1.495c-.224-.437-.415-.897-.569-1.374l-1.88-.239c-.75-.092-1.317-.731-1.317-1.488v-2.24c0-.757.567-1.396 1.32-1.486l1.876-.239c.155-.477.346-.937.569-1.374l-1.16-1.494c-.47-.606-.415-1.46.127-1.986l1.575-1.575c.521-.537 1.375-.59 1.979-.122l1.494 1.162c.437-.223.897-.414 1.375-.569l.239-1.88c.09-.75.729-1.317 1.486-1.317h2.24c.757 0 1.396.567 1.486 1.32l.239 1.876c.478.155.938.346 1.375.569l1.494-1.161c.607-.469 1.459-.415 1.985.127l1.575 1.575c.537.521.591 1.374.122 1.979l-1.161 1.495c.224.437.415.897.569 1.374l1.88.239c.749.091 1.316.73 1.316 1.487v2.24c0 .757-.567 1.396-1.32 1.486l-1.876.239c-.155.477-.346.937-.569 1.374l1.161 1.494c.47.606.415 1.459-.127 1.985l-1.575 1.575c-.521.537-1.375.592-1.979.122l-1.495-1.161c-.437.224-.897.415-1.374.569l-.239 1.88c-.091.75-.73 1.317-1.487 1.317zm-5.39-4.86c.083 0 .168.021.244.063.551.308 1.148.556 1.774.736.192.055.333.219.358.417l.28 2.2c.03.251.247.444.494.444h2.24c.247 0 .464-.193.493-.439l.281-2.204c.025-.198.166-.362.358-.417.626-.18 1.223-.428 1.774-.736.175-.098.393-.081.55.042l1.75 1.36c.201.156.483.143.655-.034l1.585-1.585c.181-.176.195-.458.039-.66l-1.36-1.75c-.123-.158-.14-.375-.042-.55.308-.551.556-1.148.736-1.774.055-.192.219-.333.417-.358l2.2-.28c.251-.031.444-.248.444-.495v-2.24c0-.247-.193-.464-.439-.493l-2.204-.281c-.198-.025-.362-.166-.417-.358-.18-.626-.428-1.223-.736-1.774-.098-.175-.082-.392.042-.55l1.36-1.75c.157-.202.143-.484-.033-.654l-1.585-1.585c-.175-.182-.458-.196-.66-.039l-1.75 1.36c-.159.123-.376.14-.551.042-.549-.308-1.146-.555-1.774-.736-.192-.055-.333-.219-.358-.417l-.28-2.2c-.031-.252-.248-.445-.495-.445h-2.24c-.247 0-.464.193-.493.439l-.281 2.204c-.025.198-.166.362-.358.418-.628.18-1.225.428-1.774.735-.175.099-.392.081-.551-.041l-1.75-1.36c-.202-.157-.483-.143-.654.033l-1.585 1.586c-.181.176-.195.458-.039.66l1.36 1.75c.123.158.14.375.042.55-.309.551-.556 1.148-.736 1.774-.055.192-.219.333-.417.358l-2.2.28c-.251.03-.444.247-.444.494v2.24c0 .247.193.464.439.493l2.204.281c.198.025.362.166.417.358.18.626.428 1.223.736 1.774.098.175.082.392-.042.55l-1.36 1.75c-.157.202-.143.484.033.654l1.585 1.585c.175.181.456.195.66.039l1.75-1.36c.091-.068.199-.104.308-.104z",
+            "m12 17c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5zm0-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z"
+        ]
+    },
+    backArrow: {
+        viewBox: "0 0 459 459", paths: [
+            "M178.5,140.25v-102L0,216.75l178.5,178.5V290.7c127.5,0,216.75,40.8,280.5,130.05C433.5,293.25,357,165.75,178.5,140.25z"
+        ]
+    },
+};
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        var el = array[i];
+        array[i] = array[j];
+        array[j] = el;
+    }
+}
+function normalizeString(str) {
+    return str.toLowerCase().replace(/  +/g, ' ').trim();
+}
+function Body(children) {
+    children.forEach(ch => document.body.appendChild(ch));
+}
+function Svg(classes, viewBox, paths, clickListener) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", viewBox);
+    paths.forEach(d => {
+        const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        p.setAttribute("d", d);
+        svg.appendChild(p);
+    });
+    const div = Div(classes);
+    div.appendChild(svg);
+    svg.style.width = "100%";
+    svg.style.height = "100%";
+    if (clickListener)
+        svg.addEventListener("click", clickListener);
+    return div;
+}
+function Label(classes, children, innerText, storeArray, index, fo) {
+    const label = initEl("label", classes, children, innerText, storeArray, index);
+    if (fo)
+        label.setAttribute("for", fo);
+    return label;
+}
+function Select_Option(classes, innerText, value, storeArray, index) {
+    const option = initEl("option", classes, undefined, innerText, storeArray, index);
+    if (value != undefined)
+        option.value = value;
+    return option;
+}
+function Select(classes, children, storeArray, index) {
+    return initEl("select", classes, children, undefined, storeArray, index);
+}
+function Div(classes, children, innerText, storeArray, index) {
+    return initEl("div", classes, children, innerText, storeArray, index);
+}
+function Span(classes, children, innerText, storeArray, index) {
+    return initEl("span", classes, children, innerText, storeArray, index);
+}
+function H1(classes, children, innerText, storeArray, index) {
+    return initEl("h1", classes, children, innerText, storeArray, index);
+}
+function CheckBox(classes, checked, storeArray, index, id, onChange) {
+    const input = initEl("input", classes, undefined, undefined, storeArray, index);
+    input.type = "checkbox";
+    if (checked)
+        input.checked = checked;
+    if (id)
+        input.setAttribute("id", id);
+    if (onChange)
+        input.addEventListener("change", onChange.bind(undefined, input));
+    return input;
+}
+function Input(classes, type, placeholder, storeArray, index, id, onChange) {
+    const input = initEl("input", classes, undefined, undefined, storeArray, index);
+    if (type)
+        input.type = type;
+    if (placeholder)
+        input.placeholder = placeholder;
+    if (id)
+        input.setAttribute("id", id);
+    if (onChange)
+        input.addEventListener("change", onChange.bind(undefined, input));
+    return input;
+}
+function Button(classes, innerText, clickListener, storeArray, index) {
+    const button = initEl("button", classes, undefined, innerText, storeArray, index);
+    if (clickListener)
+        button.addEventListener("click", clickListener.bind(undefined, button));
+    return button;
+}
+function initEl(tagName, classes, children, innerText, storeArray, index) {
+    const el = document.createElement(tagName);
+    if (classes) {
+        if (typeof classes == "string")
+            el.classList.add(classes);
+        else
+            classes.forEach(cs => el.classList.add(cs));
+    }
+    if (innerText)
+        el.innerText = innerText;
+    if (children)
+        children.forEach(ch => el.appendChild(ch));
+    if (storeArray)
+        storeArray[index || 0] = el;
+    return el;
+}
+
+    </script>
+    <script>
+"use strict";
+class Word {
+    constructor(word, translate, main = true) {
+        this.isMain = () => this.main;
+        this.question = () => this.translate;
+        this.answer = () => this.words[0];
+        if (typeof word == "string")
+            this.words = [word];
+        else
+            this.words = word;
+        for (let i = 0; i < this.words.length; i++) {
+            const w = this.words[i];
+            this.words[i] = normalizeString(w);
+        }
+        this.translate = translate;
+        this.main = main;
+    }
+    checkAnswer(answer) {
+        let correct = false;
+        for (let i = 0; i < this.words.length; i++) {
+            if (answer == this.words[i]) {
+                correct = true;
+                break;
+            }
+        }
+        return correct;
+    }
+}
+
+    </script>
+    <script>
+"use strict";
+const words1 = [
+    new Word(["a kid", "kid"], "ребенок"),
+    new Word(["to park", "park"], "припарковать машину"),
+    new Word("soft-hearted", "мягкий, отзывчивый, добрый"),
+    new Word("top", "вершина"),
+    new Word(["to mind", "mind"], "возражать"),
+    new Word(["to fix", "fix"], "чинить"),
+    new Word("dumb", "Немой, глупый"),
+    new Word("smart", "Красивый, Умный"),
+    new Word("advanced", "продвинутый"),
+    new Word("terrific", "потрясающий"),
+    new Word(["to showoff", "showoff"], "рисоваться, выставлять на показ"),
+    new Word(["to care", "care"], "заботиться, волноваться"),
+    new Word("jealous", "ревнивый"),
+    new Word(["to cheat", "cheat"], "жульничать"),
+    new Word("cheat sheet", "шпаргалка"),
+    new Word("flavour", "вкус"),
+    new Word("rotten", "Гнилой"),
+    new Word("silly", "глупый"),
+    new Word("harm", "вред"),
+    new Word(["to creep", "creep"], "красться"),
+];
+const words2 = [
+    new Word("witchcraft", "черная магия, колдовство"),
+    new Word("philosopher", "философ"),
+    new Word("caretaker", "смотритель"),
+    new Word("legendary", "легендарный"),
+    new Word("concentrate on", "сосредоточиться на"),
+    new Word("surroundings", "местность, окружение"),
+    new Word(["a dormitory", "dormitory"], "спальня (в интернате)"),
+    new Word(["a wizard", "wizard"], "волшебник, кудесник"),
+    new Word("wizardry", "волшебство, чары"),
+    new Word(["to enroll", "enroll"], "зачислять(ся), записать(ся)"),
+    new Word(["to enroll at a college", "to enroll at college", "enroll at a college", "enroll at college"], "быть зачисленным в колледж", false),
+    new Word(["to enroll on a course", "to enroll on course", "enroll on a course", "enroll on course"], "быть зачисленным в колледж", false),
+    new Word(["to be enrolled at a university", "to be enrolled at university", "be enrolled at a university", "be enrolled at university"], "быть зачисленным в университет", false),
+    new Word(["a queue", "queue"], "очередь"),
+    new Word(["a long queue", "long queue"], "длинная очередь", false),
+    new Word(["to join the queue", "join the queue", "to join queue", "join queue"], "присоединиться к очереди", false),
+    new Word(["to be in the queue", "be in the queue", "to be in queue", "be in queue"], "быть в очереди", false),
+    new Word(["to jump the queue", "jump the queue", "to jump queue", "jump queue"], "пройти, пролезть без очереди", false),
+    new Word(["a queue jumper", "queue jumper"], "человек, проходящий без очереди"),
+    new Word(["a line", "line"], "очередь (Ам.)"),
+    new Word(["to queue (queued, queueing/queuing)", "to queue", "queue"], "стоять в очереди"),
+    new Word(["to queue for (the bus)", "to queue for", "queue for", "to queue for the bus", "queue for the bus", "to queue for bus", "queue for bus"], "стоять в очереди за чем-то", false),
+    new Word(["to vanish", "vanish"], "исчезать"),
+    new Word(["to vanish from sight", "vanish from sight"], "исчезнуть из виду", false),
+    new Word("vanishing species", "исчезающие виды", false),
+    new Word(["to tickle ", "tickle"], "щекотать"),
+    new Word("solid", "1. твердый, плотный \n 2. однородный, сплошной"),
+    new Word(["a solid wall", "solid wall"], "твердая стена", false),
+    new Word("solid gold", "полностью из золота"),
+    new Word("solid advice", "надежный совет"),
+    new Word(["to force", "force"], "принуждать, заставлять"),
+    new Word(["to force on (upon) someone", "force on (upon) someone",
+        "to force on someone", "force on someone",
+        "to force upon someone", "force upon someone"], "навязать что-либо кому-то", false),
+    new Word(["to force smb to do smth", "force smb to do smth", "to force smb do smth", "force smb do smth"], "заставить кого-то что-либо делать", false),
+    new Word(["to force a door", "force a door", "to force door", "force door"], "толкнуть дверь", false),
+    new Word("force", "сила"),
+    new Word("by force", "силой", false),
+    new Word("from force of habit", "в силу привычки", false),
+    new Word(["to squeak", "squeak"], "пищать, скрипеть"),
+    new Word(["a squeak", "squeak"], "писк, скрип"),
+    new Word("squeaky", "писклявый, скрипучий"),
+    new Word(["a mess", "mess"], "беспорядок"),
+    new Word(["to be (in) a mess", "be (in) a mess", "to be (in) mess", "be (in) mess",
+        "to be a mess", "be a mess", "to be mess", "be mess",
+        "to be in a mess", "be in a mess", "to be in mess", "be in mess"], "быть в беспорядке", false),
+    new Word("messy", "неубранный, неряшливый, грязный"),
+    new Word(["to mess", "mess"], "запачкать"),
+    new Word(["to mess about (around)", "mess about (around)",
+        "to mess about", "mess about",
+        "to mess around", "mess around"], "играть (шалить)", false),
+    new Word(["to mess up", "mess up"], "пачкать, портить", false),
+    new Word("complicated", "сложный"),
+    new Word("rare", "редкий"),
+    new Word("rarely", "редко"),
+    new Word(["to relieve", "relieve"], "облегчать"),
+    new Word(["to relieve pain", "relieve pain"], "облегчить боль", false),
+    new Word(["to relieve trouble", "relieve trouble"], "решить проблемы", false),
+    new Word(["to be relieved", "be relieved"], "чувствовать облегчение", false),
+    new Word(["to relieve a headache", "relieve a headache", "to relieve headache", "relieve headache"], "избавить(ся) от головной боли", false),
+    new Word("relief", "облегчение"),
+    new Word("with relief", "с облегчением", false),
+    new Word(["a sigh of relief", "sigh of relief"], "вздох облегчения", false),
+    new Word(["a sense of relief", "sense of relief"], "чувство облегчения", false),
+    new Word(["to one's relief", "one's relief"], "к чьему-то облегчению", false),
+    new Word(["to drone", "drone"], "жужжать, гудеть"),
+    new Word(["to drone on", "drone on"], "бубнить", false),
+    new Word("droning", "гудящий, жужжащий"),
+    new Word(["to warn", "warn"], "предупреждать"),
+    new Word(["to warn sb about(/of) smth", "warn sb about(/of) smth",
+        "to warn sb about smth", "warn sb about smth",
+        "to warn sb of smth", "warn sb of smth",
+        "to warn sb about(of) smth", "warn sb about(of) smth",
+        "to warn sb about/of) smth", "warn sb about/of smth"], "предупредить о чем-то", false),
+    new Word(["to warn against sth(/smb)", "warn against sth(/smb)",
+        "to warn against sth", "warn against sth",
+        "to warn against smb", "warn against smb",
+        "to warn against sth(smb)", "warn against sth(smb)",
+        "to warn against sth/smb", "warn against sth/smb"], "предостеречь", false),
+    new Word(["a warning", "warning"], "предупреждение"),
+];
+const words3 = [
+    new Word("firmly", "твердо"),
+    new Word("downwards", "вниз"),
+    new Word("eccentric", "эксцентричный"),
+    new Word("worth", "стоящий"),
+    new Word(["to be worth doing smth", "be worth doing smth"], "стоит сделать что-либо", false),
+    new Word("outfit", "наряд"),
+    new Word("fancy dress", "нарядное платье"),
+    new Word("fancy-dress", "нарядный, маскарадный"),
+    new Word(["a fancy-dress party", "fancy-dress party"], "костюмированная вечеринка", false),
+    new Word("immense", "огромный, громадный"),
+    new Word("reluctant", "неохотный"),
+    new Word("reluctance", "нежелание"),
+    new Word(["to attach", "attach"], "прикреплять"),
+    new Word(["to attach smth to smth", "attach smth to smth"], "прикреплять что-то к чему-то", false),
+    new Word("attached", "прикрепленный"),
+    new Word(["to be attached to smth", "be attached to smth"], "быть прикрепленным к чему-то", false),
+    new Word(["to detach", "detach"], "отделять"),
+    new Word(["to detach smth from smth", "detach smth from smth"], "отделять что-то от чего-то", false),
+    new Word("detachable", "съемный, отделяемый"),
+    new Word("detached", "беспристрастный, равнодушный"),
+    new Word(["a detached house", "detached house"], "отдельный дом", false),
+    new Word(["to tie", "tie"], "привязывать, завязывать"),
+    new Word(["to tie smth to smth", "tie smth to smth"], "привязывать что-то к чему-то", false),
+    new Word(["to tie smth round smth", "tie smth round smth"], "завязывать что-то вокруг чего-то", false),
+    new Word(["to tie a knot", "tie a knot", "to tie knot", "tie knot"], "завязывать узел", false),
+    new Word(["to tie a bow", "tie a bow", "to tie bow", "tie bow"], "завязывать бант", false),
+    new Word(["to tie shoelaces", "tie shoelaces"], "завязывать шнурки", false),
+    new Word(["to tie a hair ribbon", "tie a hair ribbon", "to tie hair ribbon", "tie hair ribbon"], "завязывать ленту", false),
+    new Word(["to be tied with string(/rope)", "be tied with string(/rope)",
+        "to be tied with string", "be tied with string",
+        "to be tied with rope", "be tied with rope"], "быть связанным веревкой", false),
+    new Word(["a tie", "tie"], "галстук"),
+    new Word(["a bow tie", "bow tie"], "галстук-бабочка", false),
+    new Word("starch", "крахмал"),
+    new Word(["to starch", "starch"], "крахмалить"),
+    new Word("starched", "накрахмаленный"),
+    new Word("stiff", "онемевший, оцепеневший, жесткий"),
+    new Word(["to chew", "chew"], "жевать"),
+    new Word("ridiculous", "смешной, нелепый"),
+    new Word(["to flap", "flap"], "1. Хлопать, шлепать; 2. развеваться"),
+    new Word("funeral", "похороны"),
+    new Word(["to hold a funeral", "hold a funeral", "to hold funeral", "hold funeral"], "проводить похороны", false),
+    new Word("dignity", "достоинство"),
+    new Word(["beneath one’s dignity", "beneath ones dignity"], "ниже чьего-то достоинства", false),
+    new Word(["to keep one’s dignity", "keep one’s dignity", "to keep ones dignity", "keep ones dignity"], "сохранить достоинство", false),
+    new Word(["to lose one’s dignity", "lose one’s dignity", "to lose ones dignity", "lose ones dignity"], "потерять достоинство", false),
+    new Word(["to stand on one’s dignity", "stand on one’s dignity", "to stand on ones dignity", "stand on ones dignity"], "держаться с большим достоинством", false),
+    new Word("dignified", "полный достоинства, величавый"),
+];
+const words4 = [
+    new Word(["an individual", "individual"], "личность, индивидуум"),
+    new Word(["a robot", "robot"], "робот"),
+    new Word("kleptomania", "клептомания"),
+    new Word("intellect", "ум, разум, интеллект"),
+    new Word("in combination", "в сочетании, в комбинации"),
+    new Word("combined", "совместный, объединенный", false),
+    new Word(["a hybrid", "hybrid"], "гибрид"),
+    new Word("sterilized", "простерилизованный"),
+    new Word(["to imitate", "imitate"], "имитировать"),
+    new Word("potential", "потенциальный"),
+    new Word("emotional", "эмоциональный"),
+    new Word(["to express", "express"], "выражать"),
+    new Word(["to express thanks", "express thanks"], "выразить благодарность", false),
+    new Word("nerve", "1. Нерв; 2. Смелость"),
+    new Word(["to suffer from nerves", "suffer from nerves"], "страдать от нервов", false),
+    new Word(["to get on one’s nerves", "get on one’s nerves",
+        "to get on ones nerves", "get on ones nerves"], "действовать кому-то на нервы", false),
+    new Word(["to have the nerve to do smth", "have the nerve to do smth",
+        "to have nerve to do smth", "have nerve to do smth"], "иметь смелость (решительность) что-то сделать", false),
+    new Word("nervous", "нервный"),
+    new Word(["to bother smb with(/about) smth", "bother smb with(/about) smth",
+        "to bother smb with smth", "bother smb with smth",
+        "to bother smb about smth", "bother smb about smth"], "беспокоить кого-то чем-то", false),
+    new Word("indifferent", "равнодушный"),
+    new Word("indifferently", "равнодушно", false),
+    new Word("beside", "рядом"),
+    new Word("besides", "кроме того"),
+    new Word(["to require smth", "require smth"], "требовать что-то"),
+    new Word("equipment", "снаряжение, экипировка, оборудование"),
+    new Word(["to supply", "supply"], "снабжать"),
+    new Word(["to supply smb with smth", "supply smb with smth"], "снабжать кого-то чем-то"),
+    new Word(["to supply smth to smb/smth", "supply smth to smb/smth"], "поставлять что-тому кому-то/чему-то"),
+    new Word(["a supply", "supply"], "запас", false),
+    new Word("irritable", "раздражительный"),
+    new Word("irritably", "раздраженно", false),
+    new Word(["a case", "case"], "случай"),
+    new Word(["to work on the case", "work on the case",
+        "to work on case", "work on case"], "работать над каким-то случаем", false),
+    new Word("in case", "в случае", false),
+    new Word("in any case", "в любом случае", false),
+    new Word("just in case", "на всякий случай", false),
+    new Word("in that case", "в этом случае", false),
+    new Word("worn out", "поношенный"),
+    new Word(["a record", "record"], "рекорд, запись"),
+    new Word(["to set a record", "set a record",
+        "to set record", "set record"], "установить рекорд", false),
+    new Word(["to break the record", "break the record", "to break record", "break record"], "побить рекорд", false),
+    new Word(["to hold the record", "hold the record", "to hold record", "hold record"], "удержать рекорд", false),
+    new Word(["to predict", "predict"], "предсказывать"),
+    new Word(["to insist on smth", "insist on smth"], "настаивать на чем-то"),
+    new Word(["a desire", "desire"], "желание"),
+    new Word(["a variety", "variety"], "разнообразие"),
+    new Word(["a variety of goods", "variety of goods"], "разнообразие товаров", false),
+    new Word("various", "разнообразный", false),
+    new Word(["an advantage", "advantage"], "преимущество"),
+    new Word(["an advantage over smb", "advantage over smb"], "преимущество над кем-то", false),
+    new Word(["to have the advantage of doing smth", "have the advantage of doing smth",
+        "to have advantage of doing smth", "have advantage of doing smth"], "иметь преимущество", false),
+    new Word(["to do smth to advantage", "do smth to advantage"], "делать что-то с пользой", false),
+    new Word(["to take advantage of smth", "take advantage of smth"], "воспользоваться чем-либо", false),
+    new Word(["a disadvantage", "disadvantage"], "недостаток", false),
+];
+// new Word(["", ""], ""),
+// new Word("", ""),
+const AllParts = [
+    { words: words1, name: "Часть 1" },
+    { words: words2, name: "Часть 2" },
+    { words: words3, name: "Часть 3" },
+    { words: words4, name: "Часть 4" },
+];
+
+    </script>
+    <script>
+"use strict";
+let curTester = null;
+function reStart() {
+    if (settings.words == -1)
+        settings.words = AllParts.length - 1;
+    allEls.page1.title.innerText = AllParts[settings.words].name;
+    curTester = new Tester(AllParts[settings.words].words);
+}
+function onOKButton() {
+    if (curTester != null)
+        curTester.onOKButton();
+}
+class Tester {
+    constructor(words) {
+        this.curWord = 0;
+        this.correct = 0;
+        this.state = "none";
+        this.firstTry = true;
+        this.words = words;
+        this.init(words);
+        this.showQuestion();
+    }
+    init(words) {
+        this.curWord = 0;
+        this.correct = 0;
+        this.firstTry = true;
+        this.state = "none";
+        this.words = words;
+        if (settings.onlyMain) {
+            this.words = [];
+            words.forEach(w => {
+                if (w.isMain())
+                    this.words.push(w);
+            });
+        }
+        if (settings.shuffle) {
+            this.words = words.slice();
+            shuffle(this.words);
+        }
+    }
+    setLabels() {
+        allEls.page1.all.innerText = `${this.curWord} / ${this.words.length}`;
+        if (settings.repeatMode)
+            allEls.page1.correct.innerText = `On first try: ${this.correct} / ${this.words.length}`;
+        else
+            allEls.page1.correct.innerText = `Correct: ${this.correct} / ${this.words.length}`;
+    }
+    showQuestion() {
+        if (this.curWord >= this.words.length) {
+            this.showResult();
+            return;
+        }
+        allEls.page1.question.innerText = this.words[this.curWord].question();
+        allEls.page1.answer.innerText = "";
+        allEls.page1.input.classList.remove("input-correct");
+        allEls.page1.input.classList.remove("input-uncorrect");
+        allEls.page1.input.disabled = false;
+        allEls.page1.input.value = "";
+        this.setLabels();
+        this.state = "question";
+        allEls.page1.button.innerText = "OK";
+    }
+    checkAnswer() {
+        const curWord = this.words[this.curWord];
+        const answer = normalizeString(allEls.page1.input.value);
+        allEls.page1.input.value = answer;
+        const result = curWord.checkAnswer(answer);
+        if (settings.repeatMode) {
+            if (result) {
+                if (this.firstTry)
+                    this.correct += 1;
+                this.firstTry = true;
+                this.curWord += 1;
+            }
+            else {
+                this.firstTry = false;
+            }
+        }
+        else {
+            if (result)
+                this.correct += 1;
+            this.curWord += 1;
+        }
+        allEls.page1.answer.innerText = curWord.answer();
+        allEls.page1.input.disabled = true;
+        if (result)
+            allEls.page1.input.classList.add("input-correct");
+        else
+            allEls.page1.input.classList.add("input-uncorrect");
+        this.setLabels();
+        this.state = "answer";
+        allEls.page1.button.innerText = "Next";
+    }
+    showResult() {
+        allEls.page1.input.classList.remove("input-correct");
+        allEls.page1.input.classList.remove("input-uncorrect");
+        allEls.page1.input.disabled = true;
+        allEls.page1.input.value = "";
+        allEls.page1.question.innerText = "Результат";
+        if (settings.repeatMode)
+            allEls.page1.answer.innerText = `С первой попытки: ${Math.round(this.correct / this.words.length)}%`;
+        else
+            allEls.page1.answer.innerText = `Правильно: ${Math.round(this.correct / this.words.length)}%`;
+        allEls.page1.button.innerText = "Again";
+        this.state = "result";
+    }
+    restart() {
+        this.init(this.words);
+        this.showQuestion();
+    }
+    onOKButton() {
+        switch (this.state) {
+            case "question":
+                this.checkAnswer();
+                break;
+            case "answer":
+                this.showQuestion();
+                break;
+            case "result":
+                this.restart();
+                break;
+            default:
+                console.error("switch default");
+                break;
+        }
+    }
+}
+
+    </script>
+    <script>
+"use strict";
+const settings = restoreSettings();
+const allEls = init();
+setSelect();
+toPage(getPage());
+window.addEventListener("keypress", (e) => {
+    if (e.code == "Enter" && e.target != allEls.page1.button)
+        onOKButton();
+});
+window.addEventListener("popstate", (e) => {
+    const state = e.state;
+    if (typeof state == "number")
+        toPage(state);
+    if (state == null)
+        toPage(0);
+});
+function init() {
+    const els = [];
+    document.body.innerHTML = "";
+    Body([
+        Div(["page", "page-1"], [
+            Div("header", [
+                Svg("btn-toPage", SVGs.settings.viewBox, SVGs.settings.paths, () => toPage(1)),
+                Div("header-title-part", [], "## Часть", els, 1)
+            ]),
+            Div("footer", [], 'Артикли, слова в скобках и частицу "to" писать не обязательно'),
+            Div("testBlock", [
+                Div("testBlock-title1", [], "Some text", els, 2),
+                Div("testBlock-title2", [], "Some text", els, 3),
+                Div("testBlock-controls", [
+                    Input("testBlock-input", "text", "", els, 4),
+                    Button("testBlock-OKbutton", "OK", onOKButton, els, 5),
+                ]),
+                Div(["testBlock-lbl", "testBlock-lbl-correct"], [], "Correct: ## / ##", els, 6),
+                Div(["testBlock-lbl", "testBlock-lbl-all"], [], "## / ##", els, 7),
+            ]),
+        ], undefined, els, 0),
+        Div(["page", "page-2"], [
+            Div("header", [
+                // Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => toPage(0)),
+                Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => history.back()),
+                Div("header-title-part", [], "Настройки")
+            ]),
+            Div("settings-body", [
+                Div("settings-block", [
+                    Div("settings-text", [], "Слова:"),
+                    Select("select", [], els, 9)
+                ]),
+                Div("settings-block", [
+                    CheckBox("checkBox", settings.shuffle, undefined, undefined, "checkbox1", (inp) => setSetting("shuffle", inp.checked)),
+                    Label("settings-text", [], "Перемешивать слова", undefined, undefined, "checkbox1"),
+                ]),
+                Div("settings-block", [
+                    CheckBox("checkBox", settings.onlyMain, undefined, undefined, "checkbox2", (inp) => setSetting("onlyMain", inp.checked)),
+                    Label("settings-text", [], "Только главные слова", undefined, undefined, "checkbox2"),
+                ]),
+                Div("settings-block", [
+                    CheckBox("checkBox", settings.repeatMode, undefined, undefined, "checkbox3", (inp) => setSetting("repeatMode", inp.checked)),
+                    Label("settings-text", [], "Режим заучивания", undefined, undefined, "checkbox3"),
+                ]),
+            ]),
+        ], undefined, els, 8),
+    ]);
+    return {
+        page1: {
+            page: els[0],
+            title: els[1],
+            question: els[2],
+            answer: els[3],
+            input: els[4],
+            button: els[5],
+            correct: els[6],
+            all: els[7],
+        },
+        page2: {
+            page: els[8],
+            select: els[9],
+        }
+    };
+}
+function toPage(page) {
+    if (page == 0) {
+        allEls.page1.page.classList.add("page-active");
+        allEls.page2.page.classList.remove("page-active");
+        reStart();
+    }
+    else {
+        allEls.page2.page.classList.add("page-active");
+        allEls.page1.page.classList.remove("page-active");
+    }
+    history.pushState(page, "");
+}
+function getPage() {
+    const currentState = history.state;
+    if (currentState == 1)
+        return 1;
+    return 0;
+}
+function restoreSettings() {
+    const settings = {
+        shuffle: getBoolFromLS("shuffle", false),
+        onlyMain: getBoolFromLS("onlyMain", false),
+        repeatMode: getBoolFromLS("repeatMode", false),
+        words: localStorage.getItem("words") || -1,
+        maxWords: localStorage.getItem("maxWords") || -1,
+    };
+    return settings;
+}
+function getBoolFromLS(key, def) {
+    const v = localStorage.getItem(key);
+    if (v == null)
+        return def;
+    return v == "1";
+}
+function setSetting(setting, v) {
+    settings[setting] = v;
+    if (typeof v == "boolean")
+        localStorage.setItem(setting, `${v ? 1 : 0}`);
+    else
+        localStorage.setItem(setting, `${v}`);
+}
+function setSelect() {
+    const select = allEls.page2.select;
+    for (let i = 0; i < AllParts.length; i++) {
+        const part = AllParts[i];
+        const option = Select_Option("option", part.name, i);
+        select.appendChild(option);
+    }
+    const maxWords = AllParts.length - 1;
+    let curPart = settings.words;
+    if (curPart == -1 || settings.maxWords < maxWords)
+        curPart = maxWords;
+    localStorage.setItem("maxWords", `${maxWords}`);
+    select.selectedIndex = curPart;
+    select.addEventListener("change", () => {
+        localStorage.setItem("words", `${select.selectedIndex}`);
+        settings.words = select.selectedIndex;
+    });
+}
+
+    </script>
+</body>
+</html>

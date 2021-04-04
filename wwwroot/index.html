@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Words Learner</title>
+	<script src="out/functions.js" defer></script>
+	<script src="out/word.js" defer></script>
+	<script src="out/words.js" defer></script>
+	<script src="out/tester.js" defer></script>
+	<script src="out/main.js" defer></script>
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		body {
+			display: flex;
+			margin: 0px;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			--header-height--: 45px;
+		}
+		.page {
+			width: 100%;
+			height: 100%;
+			display: none;
+		}
+		.page-active {
+			display: flex;
+		}
+		.header {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: var(--header-height--);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: aquamarine;
+			user-select: none;
+		}
+		.btn-toPage {
+			position: absolute;
+			left: 0px;
+			display: block;
+			height: 35px;
+			width: 35px;
+			margin: 5px;
+			cursor: pointer;
+		}
+		.header-title {
+			font-size: medium;
+		}
+	</style>
+	<style>
+		.page-1 {
+			justify-content: center;
+			align-items: center;
+		}
+		.footer {
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			width: 100%;
+			min-height: 30px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background-color: aquamarine;
+			font-size: small;
+			text-align: center;
+		}
+
+		.testBlock {
+			position: relative;
+			width: 100%;
+			max-width: 400px;
+			/* min-height: 200px; */
+			background-color: aquamarine;
+			border: 2px solid green;
+			border-radius: 10px;
+		}
+		.testBlock-title1 {
+			font-size: xx-large;
+			text-align: center;
+			margin: 30px 10px 20px 10px;
+		}
+		.testBlock-title2 {
+			font-size: x-large;
+			text-align: center;
+			min-height: 30px;
+			margin: 20px 10px 20px 10px;
+		}
+		.testBlock-controls {
+			min-height: 50px;
+			display: flex;
+    		justify-content: center;
+    		align-items: center;
+		}
+		.testBlock-input {
+			font-size: 16px;
+			height: 24px;
+			outline: none;
+			/* outline-width: 1px; */
+    		/* outline-color: green; */
+			width: 45%;
+			border: 1px solid gray;
+			border-radius: 4px 0px 0px 4px;
+			border-right-color: grey !important;
+		}
+		.testBlock-input:disabled {
+			color: black;
+			background-color: transparent;
+		}
+		.input-correct, .input-uncorrect + .testBlock-OKbutton {
+			border-color: green;
+		}
+		.input-uncorrect, .input-uncorrect + .testBlock-OKbutton {
+			border-color: tomato;
+		}
+		.testBlock-OKbutton {
+			outline: none;
+			height: 24px;
+			width: 47px;
+			border: 1px solid gray;
+			border-left-width: 0px;
+			border-radius: 0px 4px 4px 0px;
+		}
+		.testBlock-input:focus, .testBlock-input:focus + .testBlock-OKbutton {
+			border-color: blue;
+		}
+		.testBlock-OKbutton:active {
+			box-shadow: inset 0px 0px 2px 0px black;
+		}
+		.testBlock-OKbutton:hover {
+			text-decoration: underline;
+		}
+		.testBlock-lbl {
+			position: absolute;
+			top: 0px;
+			margin: 5px;
+			font-size: medium;
+		}
+		.testBlock-lbl-all {
+			right: 0px;
+		}
+	</style>
+	<style>
+		.page-2 {
+			background-color: rgb(187, 250, 229);
+			justify-content: center;
+		}
+		.settings-body {
+			width: 100%;
+			max-width: 500px;
+			margin-top: var(--header-height--);
+			padding: 20px;
+		}
+		.settings-block {
+			display: flex;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.settings-text {
+			user-select: none;
+		}
+		.select {
+			margin-left: 10px;
+			min-width: 100px;
+		}
+	</style>
+</head>
+<body>
+	<noscript style="font-size: x-large;">Если вы видите это, попробуете открыть в Google Chrome</noscript>
+</body>
+</html>
