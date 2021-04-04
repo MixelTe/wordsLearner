@@ -67,6 +67,7 @@ class Tester
 		this.setLabels();
 		this.state = "question";
 		allEls.page1.button.innerText = "OK";
+		allEls.page1.input.focus();
 	}
 	private checkAnswer()
 	{
