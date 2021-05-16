@@ -108,8 +108,8 @@ class Tester
 		allEls.page1.input.disabled = true;
 		allEls.page1.input.value = "";
 		allEls.page1.question.innerText = "Результат";
-		if (settings.repeatMode) allEls.page1.answer.innerText = `С первой попытки: ${Math.round(this.correct / this.words.length)}%`;
-		else allEls.page1.answer.innerText = `Правильно: ${Math.round(this.correct / this.words.length)}%`;
+		if (settings.repeatMode) allEls.page1.answer.innerText = `С первой попытки: ${Math.round(this.correct / this.words.length * 100)}%`;
+		else allEls.page1.answer.innerText = `Правильно: ${Math.round(this.correct / this.words.length * 100)}%`;
 		allEls.page1.button.innerText = "Again";
 		this.state = "result";
 	}

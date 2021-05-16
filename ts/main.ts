@@ -1,5 +1,5 @@
 const settings = restoreSettings();
-const allEls = init()
+const allEls = init();
 
 setSelect();
 toPage(getPage());
@@ -61,7 +61,9 @@ function init()
 				]),
 			]),
 		], undefined, els, 8),
-	])
+	]);
+
+	els[4].spellcheck = false;
 
 	return {
 		page1: {
