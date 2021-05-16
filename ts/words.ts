@@ -95,11 +95,11 @@ const words2 = [
 		"to warn sb of smth", "warn sb of smth",
 		"to warn sb about(of) smth", "warn sb about(of) smth",
 		"to warn sb about/of) smth", "warn sb about/of smth"], "предупредить о чем-то", false),
-	new Word(["to warn against sth(/smb)", "warn against sth(/smb)",
-		"to warn against sth", "warn against sth",
+	new Word(["to warn against smth(/smb)", "warn against smth(/smb)",
+		"to warn against smth", "warn against smth",
 		"to warn against smb", "warn against smb",
-		"to warn against sth(smb)", "warn against sth(smb)",
-		"to warn against sth/smb", "warn against sth/smb"], "предостеречь", false),
+		"to warn against smth(smb)", "warn against smth(smb)",
+		"to warn against smth/smb", "warn against smth/smb"], "предостеречь", false),
 	new Word(["a warning", "warning"], "предупреждение"),
 ];
 const words3 = [
@@ -260,6 +260,30 @@ const words5 = [
 	new Word(["a bare wall", "bare wall"], "голая стена", false),
 	new Word("barefooted", "босоногий", false),
 ]
+
+const words6 = [
+	new Word("fierce", "яростный"),
+	new Word(["a memory (memories)", "a memory, memories", "memory, memories",
+		"a memory memories", "memory memories", "a memory", "memory", "memories"], "память (воспоминания)"),
+	new Word(["an ability", "ability"], "способность"),
+	new Word("idle", "праздный, ленивый"),
+	new Word("illiterate", "неграмотный"),
+	new Word(["a point", "point"], "точка"),
+	new Word(["to point", "point"], "указывать"),
+	new Word(["to waste", "waste"], "тратить"),
+	new Word("wasteful", "расточительный"),
+	new Word("passionate", "страстный"),
+	new Word(["marvellous", "marvelous"], "чудесный"),
+	new Word("obvious", "очевидный"),
+	new Word("obviously", "очевидно"),
+	new Word("glorious", "славный"),
+	new Word("flame", "пламя"),
+	new Word(["to absorb", "absorb"], "впитывать, поглощать"),
+	new Word(["to float", "float"], "плавать"),
+	new Word(["to enclose", "enclose"], "заключать, окружать"),
+	new Word(["a gift", "gift"], "подарок, дар, талант"),
+	new Word("gifted", "одаренный"),
+]
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -269,6 +293,7 @@ const AllParts: Words[] = [
 	{ words: words3, name: "Часть 3" },
 	{ words: words4, name: "Часть 4" },
 	{ words: words5, name: "Часть 5" },
+	{ words: words6, name: "Часть 6 (возм. ошибки)" },
 ]
 
 interface Words
