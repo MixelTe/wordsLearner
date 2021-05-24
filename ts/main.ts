@@ -5,7 +5,7 @@ setSelect();
 toPage(getPage());
 window.addEventListener("keypress", (e) =>
 {
-	if (e.code == "Enter" && e.target != allEls.page1.button) onOKButton();
+	if (e.key == "Enter" && e.target != allEls.page1.button) onOKButton();
 });
 window.addEventListener("popstate", (e) =>
 {
