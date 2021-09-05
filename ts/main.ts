@@ -38,8 +38,8 @@ function init()
 		], undefined, els, 0),
 		Div(["page", "page-2"], [
 			Div("header", [
-				// Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => toPage(0)),
-				Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => history.back()),
+				Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => toPage(0)),
+				// Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => history.back()),
 				Div("header-title-part", [], "Настройки")
 			]),
 			Div("settings-body", [
@@ -111,8 +111,8 @@ function restoreSettings()
 		shuffle: getBoolFromLS("shuffle", false),
 		onlyMain: getBoolFromLS("onlyMain", false),
 		repeatMode: getBoolFromLS("repeatMode", false),
-		words: localStorage.getItem("words") || -1,
-		maxWords: localStorage.getItem("maxWords") || -1,
+		words: getIntFromLS("words", -1),
+		maxWords: getIntFromLS("maxWords", -1),
 	}
 	return settings;
 }
@@ -121,6 +121,13 @@ function getBoolFromLS(key: string, def: boolean)
 	const v = localStorage.getItem(key);
 	if (v == null) return def;
 	return v == "1";
+}
+function getIntFromLS(key: string, def: number)
+{
+	const v = localStorage.getItem(key);
+	if (v == null) return def;
+	const num = parseInt(v);
+	return isNaN(num) ? def : num;
 }
 function setSetting(setting: keyof Settings, v: any)
 {
@@ -131,20 +138,31 @@ function setSetting(setting: keyof Settings, v: any)
 function setSelect()
 {
 	const select = allEls.page2.select;
+	let group: HTMLOptGroupElement | null = null;
 	for (let i = 0; i < AllParts.length; i++) {
 		const part = AllParts[i];
-		const option = Select_Option("option", part.name, i);
-		select.appendChild(option);
+		if (part.blank)
+		{
+			group = document.createElement("optgroup");
+			group.label = part.name;
+			select.appendChild(group);
+		}
+		else
+		{
+			const option = Select_Option("option", part.name, i);
+			if (group) group.appendChild(option);
+			else select.appendChild(option);
+		}
 	}
 	const maxWords = AllParts.length - 1;
 	let curPart = settings.words;
 	if (curPart == -1 || settings.maxWords < maxWords) curPart = maxWords;
 	localStorage.setItem("maxWords", `${maxWords}`);
-	select.selectedIndex = curPart;
+	select.value = `${curPart}`;
 	select.addEventListener("change", () =>
 	{
-		localStorage.setItem("words", `${select.selectedIndex}`);
-		settings.words = select.selectedIndex;
+		localStorage.setItem("words", `${select.value}`);
+		settings.words = parseInt(select.value);
 	});
 }
 

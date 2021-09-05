@@ -399,12 +399,13 @@ const words_adverbs = [
 // new Word("", ""),
 
 const AllParts: Words[] = [
+	{ words: [], name: "8 Класс", blank: true },
 	{ words: words1, name: "Часть 1" },
 	{ words: words2, name: "Часть 2" },
 	{ words: words3, name: "Часть 3" },
 	{ words: words4, name: "Часть 4" },
 	{ words: words5, name: "Часть 5" },
-	{ words: words6, name: "Часть 6 (возм. ошибки)" },
+	{ words: words6, name: "Часть 6" },
 	{ words: words_hand, name: "Глагол to hand" },
 	{ words: words_break, name: "Глагол to break" },
 	{ words: words_come, name: "Глагол to come" },
@@ -419,4 +420,5 @@ interface Words
 {
 	words: Word[],
 	name: string,
+	blank?: boolean,
 }
