@@ -395,6 +395,43 @@ const words_adverbs = [
 	new Word("wide", "широко (характеристика физического действия)"),
 	new Word("widely", "широко (в переносном смысле)"),
 ]
+
+const words9_1 = [
+	new Word(["to wear indigo veils", "wear indigo veils"], "носить накидку цвета индиго"),
+	new Word(["to keep farm animals", "keep farm animals"], "держать домашний скот"),
+	new Word(["to live on hand-built wooden boats", "live on hand-built wooden boats"], "жить в самодельных деревянных лодках"),
+	new Word(["to have deep knowledge of the sea", "have deep knowledge of the sea",
+			  "to have deep knowledge of sea", "have deep knowledge of sea"], "иметь глубокие знания о море"),
+	new Word(["to like drinking mint tea", "like drinking mint tea"], "любить пить мятный чай"),
+	new Word(["to catch and sell fish", "catch and sell fish"], "ловить и продовать рыбу"),
+	new Word(["to live in tents", "live in tents"], "жить в палатках"),
+	new Word("harsh sand", "жесткий песок"),
+	new Word("livestock herders", "скотовод"),
+	new Word(["an idyllic way of life", "idyllic way of life"], "идеальный образ жизни"),
+	new Word(["to migrate to city", "migrate to city"], "переехать в город"),
+	new Word(["to settle in temporary stilt huts", "settle in temporary stilt huts"], "селиться во временных хижинах на сваях"),
+	new Word(["to treat sb as family", "treat sb as family"], "относится как к семье"),
+	new Word(["to flee(-fled-fled)", "flee(-fled-fled)",
+			  "to flee-fled-fled", "flee-fled-fled",
+			  "to flee", "flee"], "убегать"),
+	new Word(["to rear animals for meat", "rear animals for meat"], "выращивать животных для мяса"),
+	new Word(["to take sth for granted", "take sth for granted"], "воспринимать что-то как само собой разумеющееся"),
+	new Word("nomads are always on move", "кочевники всегда в движении"),
+	new Word(["to witness first-hand", "witness first-hand"], "узеать что-то из первоисточника"),
+	new Word(["to be struck by sth", "be struck by sth"], "быть пораженным чем-то"),
+	new Word(["a tribe", "tribe"], "племя"),
+	new Word("tribal", "племенной"),
+	new Word(["to protect the camel trading caravans", "protect the camel trading caravans",
+			  "to protect camel trading caravans", "protect camel trading caravans"], "защищать караваны торгующие верблюдами"),
+	new Word(["a drought", "drought"], "засуха"),
+	new Word(["a monsoon season", "monsoon season"], "сезон дождей"),
+	new Word(["a spear", "spear"], "копьё"),
+	new Word(["to have few possessions", "have few possessions"], "иметь мало вещей"),
+	new Word("sparsely-populated country", "малонаселённая страна"),
+	new Word(["to shear", "shear"], "стричь"),
+	new Word("satellite dish", "спутниковая тарелка"),
+	new Word(["Help yourself to a cup of tea, Jim", "Help yourself to cup of tea, Jim"], "Угощайся чашечкой чая, Джим"),
+]
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -414,6 +451,8 @@ const AllParts: Words[] = [
 	{ words: words_hold, name: "Глагол to hold" },
 	{ words: words_phrasalVerbs, name: "фразовые глаголы" },
 	{ words: words_adverbs, name: "Наречия" },
+	{ words: [], name: "9 Класс", blank: true },
+	{ words: words9_1, name: "Часть 1" },
 ]
 
 interface Words
