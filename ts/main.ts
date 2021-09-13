@@ -26,8 +26,12 @@ function init()
 			]),
 			Div("footer", [], 'Артикли, слова в скобках и частицу "to" писать не обязательно'),
 			Div("testBlock", [
-				Div("testBlock-title1", [], "Some text", els, 2),
-				Div("testBlock-title2", [], "Some text", els, 3),
+				Div("testBlock-title1-block", [
+					Div("testBlock-title1", [], "Some text", els, 2),
+				]),
+				Div("testBlock-title2-block", [
+					Div("testBlock-title2", [], "Some text", els, 3),
+				]),
 				Div("testBlock-controls", [
 					Input("testBlock-input", "text", "", els, 4),
 					Button("testBlock-OKbutton", "OK", onOKButton, els, 5),

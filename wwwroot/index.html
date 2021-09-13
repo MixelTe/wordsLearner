@@ -83,21 +83,35 @@
 			position: relative;
 			width: 100%;
 			max-width: 400px;
+			max-height: 100%;
+			overflow: auto;
 			/* min-height: 200px; */
 			background-color: aquamarine;
 			border: 2px solid green;
 			border-radius: 10px;
+			display: flex;
+			flex-direction: column;
+		}
+		.testBlock-title1-block {
+			overflow: auto;
+			margin-top: 30px;
+			flex-shrink: 1;
+		}
+		.testBlock-title2-block {
+			overflow: auto;
+			padding: 10px;
+			flex-shrink: 1;
+			min-height: 50px;
 		}
 		.testBlock-title1 {
 			font-size: xx-large;
 			text-align: center;
-			margin: 30px 10px 20px 10px;
+			margin: 0px 10px 20px 10px;
 		}
 		.testBlock-title2 {
 			font-size: x-large;
 			text-align: center;
 			min-height: 30px;
-			margin: 20px 10px 20px 10px;
 		}
 		.testBlock-controls {
 			min-height: 50px;
