@@ -78,21 +78,35 @@
 			position: relative;
 			width: 100%;
 			max-width: 400px;
+			max-height: 100%;
+			overflow: auto;
 			/* min-height: 200px; */
 			background-color: aquamarine;
 			border: 2px solid green;
 			border-radius: 10px;
+			display: flex;
+			flex-direction: column;
+		}
+		.testBlock-title1-block {
+			overflow: auto;
+			margin-top: 30px;
+			flex-shrink: 1;
+		}
+		.testBlock-title2-block {
+			overflow: auto;
+			padding: 10px;
+			flex-shrink: 1;
+			min-height: 50px;
 		}
 		.testBlock-title1 {
 			font-size: xx-large;
 			text-align: center;
-			margin: 30px 10px 20px 10px;
+			margin: 0px 10px 20px 10px;
 		}
 		.testBlock-title2 {
 			font-size: x-large;
 			text-align: center;
 			min-height: 30px;
-			margin: 20px 10px 20px 10px;
 		}
 		.testBlock-controls {
 			min-height: 50px;
@@ -729,7 +743,7 @@ const words9_1 = [
     new Word(["to catch and sell fish", "catch and sell fish"], "ловить и продовать рыбу"),
     new Word(["to live in tents", "live in tents"], "жить в палатках"),
     new Word("harsh sand", "жесткий песок"),
-    new Word("livestock herders", "скотовод"),
+    new Word("livestock herders", "скотоводы"),
     new Word(["an idyllic way of life", "idyllic way of life"], "идеальный образ жизни"),
     new Word(["to migrate to city", "migrate to city"], "переехать в город"),
     new Word(["to settle in temporary stilt huts", "settle in temporary stilt huts"], "селиться во временных хижинах на сваях"),
@@ -740,7 +754,7 @@ const words9_1 = [
     new Word(["to rear animals for meat", "rear animals for meat"], "выращивать животных для мяса"),
     new Word(["to take sth for granted", "take sth for granted"], "воспринимать что-то как само собой разумеющееся"),
     new Word("nomads are always on move", "кочевники всегда в движении"),
-    new Word(["to witness first-hand", "witness first-hand"], "узеать что-то из первоисточника"),
+    new Word(["to witness first-hand", "witness first-hand"], "узнать что-то из первоисточника"),
     new Word(["to be struck by sth", "be struck by sth"], "быть пораженным чем-то"),
     new Word(["a tribe", "tribe"], "племя"),
     new Word("tribal", "племенной"),
@@ -754,6 +768,49 @@ const words9_1 = [
     new Word(["to shear", "shear"], "стричь"),
     new Word("satellite dish", "спутниковая тарелка"),
     new Word(["Help yourself to a cup of tea, Jim", "Help yourself to cup of tea, Jim"], "Угощайся чашечкой чая, Джим"),
+];
+const words9_2 = [
+    new Word(["to live in a busy town", "live in a busy town",
+        "to live in busy town", "live in busy town"], "жить в оживлённом городе"),
+    new Word(["to live in a secluded village", "live in a secluded village",
+        "to live in secluded village", "live in secluded village"], "жить в уединённой деревушке"),
+    new Word(["to live in a modern flat", "live in a modern flat",
+        "to live in modern flat", "live in modern flat"], "жить в современной квартире"),
+    new Word(["to live in a wooden shelter", "live in a wooden shelter",
+        "to live in wooden shelter", "live in wooden shelter"], "жить в деревянном убежище"),
+    new Word(["to work in a office", "work in a office",
+        "to work in office", "work in office"], "работать в офисе"),
+    new Word(["to hunt crocodiles", "hunt crocodiles"], "охотиться на крокодилов"),
+    new Word(["to use public transport", "use public transport"], "пользоваться общественным транстпортом"),
+    new Word(["to walk to work", "walk to work"], "идти на работу пешком"),
+    new Word(["to ride a bicycle", "ride a bicycle",
+        "to ride bicycle", "ride bicycle"], "ездить на велосипеде"),
+    new Word(["to cook your own food", "cook your own food"], "готовить еду"),
+    new Word(["to order takeaway", "order takeaway"], "заказать еду на вынос"),
+    new Word(["to surf the Net", "surf the Net",
+        "to surf Net", "surf Net"], "лазить по интернету"),
+    new Word(["to go to the gym", "go to the gym",
+        "to go to gym", "go to gym"], "ходить в зал"),
+    new Word(["to eat out", "eat out"], "есть в ресторанах, кафе и т. д. (не дома)"),
+    new Word("Stone Age", "Каменный век"),
+    new Word(["to adapt to the modern world", "adapt to the modern world",
+        "to adapt to modern world", "adapt to modern world"], "привыкнуть к современному миру"),
+    new Word(["to be a rare exception", "be a rare exception",
+        "to be rare exception", "be rare exception"], "быть редким исключением"),
+    new Word("with terror", "с ужасом"),
+    new Word("with suspicion", "с подозрением"),
+    new Word(["to go through the revolving door", "go through the revolving door",
+        "to go through revolving door", "go through revolving door"], "пройти через вращающеюся дверь"),
+    new Word("gasps of wonder", "вздохи удивления"),
+    new Word(["an invisible hand", "invisible hand"], "невидимая рука"),
+    new Word(["the elderly", "elderly"], "пожилые"),
+    new Word(["to be convinced", "be convinced"], "быть убеждённым"),
+    new Word(["to look after", "look after"], "присматриваться, присматривать"),
+    new Word("emotional", "эмоциональный"),
+    new Word(["to treasure", "treasure"], "ценить"),
+    new Word(["without a second thought", "without second thought"], "не раздумывая"),
+    new Word(["to stand still", "stand still"], "стоять спокойно, не двигаясь"),
+    new Word("overwhelming hospitaity", "потрясающее гостеприимство"),
 ];
 // new Word(["", ""], ""),
 // new Word("", ""),
@@ -775,6 +832,7 @@ const AllParts = [
     { words: words_adverbs, name: "Наречия" },
     { words: [], name: "9 Класс", blank: true },
     { words: words9_1, name: "Часть 1" },
+    { words: words9_2, name: "Часть 2" },
 ];
 
     </script>
@@ -937,8 +995,12 @@ function init() {
             ]),
             Div("footer", [], 'Артикли, слова в скобках и частицу "to" писать не обязательно'),
             Div("testBlock", [
-                Div("testBlock-title1", [], "Some text", els, 2),
-                Div("testBlock-title2", [], "Some text", els, 3),
+                Div("testBlock-title1-block", [
+                    Div("testBlock-title1", [], "Some text", els, 2),
+                ]),
+                Div("testBlock-title2-block", [
+                    Div("testBlock-title2", [], "Some text", els, 3),
+                ]),
                 Div("testBlock-controls", [
                     Input("testBlock-input", "text", "", els, 4),
                     Button("testBlock-OKbutton", "OK", onOKButton, els, 5),
