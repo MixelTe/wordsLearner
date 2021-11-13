@@ -474,7 +474,7 @@ const words9_2 = [
 	new Word(["to treasure", "treasure"], "ценить"),
 	new Word(["without a second thought", "without second thought"], "не раздумывая"),
 	new Word(["to stand still", "stand still"], "стоять спокойно, не двигаясь"),
-	new Word("overwhelming hospitaity", "потрясающее гостеприимство"),
+	new Word("overwhelming hospitality", "потрясающее гостеприимство"),
 ]
 
 const words9_pg15 = [
@@ -499,6 +499,49 @@ const words9_pg15 = [
 	new Word("sell-by date", "срок годности"),
 	new Word("pitying", "жалость, испытывающий жалость"),
 ]
+
+const words_insects = [
+	new Word("scorpion", "скорпион"),
+	new Word("fly", "муха"),
+	new Word("dragonfly", "стрекоза"),
+	new Word("ant", "муравей"),
+	new Word("maggot", "личинка"),
+	new Word("grasshopper", "кузнечик"),
+	new Word("cricket", "сверчок"),
+	new Word("bee", "пчела"),
+	new Word("wasp", "оса"),
+	new Word("beetle", "жук"),
+	new Word("earthworm", "земляной червь"),
+	new Word("butterfly", "бабочка"),
+	new Word("moth", "моль"),
+	new Word("house spider", "домашний паук"),
+	new Word("tarantula", "тарантул"),
+	new Word("cockroach", "таракан"),
+	new Word("flea", "блоха"),
+	new Word(["centipede(/millipede)", "centipede/millipede", "centipede / millipede", "centipede", "millipede"], "многоножка"),
+	new Word("caterpillar", "гусеница"),
+	new Word("slug", "слизняк"),
+	new Word("snail", "улитка"),
+	new Word("ladybird", "божья коровка"),
+]
+
+const words_pg29 = [
+	new Word("aroma", "аромат"),
+	new Word("platter", "блюдо (большая тарелка)"),
+	new Word("common sight", "обычное зрелище"),
+	new Word("deep-fried", "жареный во фритюре"),
+	new Word("marinated", "маринованный"),
+	new Word("roasted", "жареный"),
+	new Word("pest", "вредитель"),
+	new Word("contamination", "загрязнение"),
+	new Word("unavoidable", "неизбежный"),
+	new Word("dough", "тесто"),
+	new Word("nutty taste", "ореховый вкус"),
+	new Word("abundant", "обильный"),
+	new Word(["fraction of the resources", "fraction of resources"], "доля ресурсов"),
+	new Word("cholesterol", "холестери"),
+]
+
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -522,6 +565,8 @@ const AllParts: Words[] = [
 	{ words: words9_1, name: "Часть 1" },
 	{ words: words9_2, name: "Часть 2" },
 	{ words: words9_pg15, name: "Стр. 15" },
+	{ words: words_insects, name: "Насекомые" },
+	{ words: words_pg29, name: "Стр. 29" },
 ]
 
 interface Words
