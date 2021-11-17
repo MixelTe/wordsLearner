@@ -1,3 +1,4 @@
+const prefix = "wordsLearner_";
 const settings = restoreSettings();
 const allEls = init();
 
@@ -122,13 +123,13 @@ function restoreSettings()
 }
 function getBoolFromLS(key: string, def: boolean)
 {
-	const v = localStorage.getItem(key);
+	const v = localStorage.getItem(prefix + key);
 	if (v == null) return def;
 	return v == "1";
 }
 function getIntFromLS(key: string, def: number)
 {
-	const v = localStorage.getItem(key);
+	const v = localStorage.getItem(prefix + key);
 	if (v == null) return def;
 	const num = parseInt(v);
 	return isNaN(num) ? def : num;
@@ -136,8 +137,8 @@ function getIntFromLS(key: string, def: number)
 function setSetting(setting: keyof Settings, v: any)
 {
 	settings[setting] = <never>v;
-	if (typeof v == "boolean") localStorage.setItem(setting, `${v ? 1 : 0}`);
-	else localStorage.setItem(setting, `${v}`);
+	if (typeof v == "boolean") localStorage.setItem(prefix + setting, `${v ? 1 : 0}`);
+	else localStorage.setItem(prefix + setting, `${v}`);
 }
 function setSelect()
 {
@@ -159,13 +160,14 @@ function setSelect()
 		}
 	}
 	const maxWords = AllParts.length - 1;
-	let curPart = settings.words;
-	if (curPart == -1 || settings.maxWords < maxWords) curPart = maxWords;
-	localStorage.setItem("maxWords", `${maxWords}`);
-	select.value = `${curPart}`;
+	const curPart = settings.words;
+	if (curPart == -1 || settings.maxWords < maxWords) settings.words = maxWords;
+	localStorage.setItem(prefix + "maxWords", `${maxWords}`);
+	if (curPart != -1) localStorage.setItem(prefix + "words", `${settings.words}`);
+	select.value = `${settings.words}`;
 	select.addEventListener("change", () =>
 	{
-		localStorage.setItem("words", `${select.value}`);
+		localStorage.setItem(prefix + "words", `${select.value}`);
 		settings.words = parseInt(select.value);
 	});
 }
