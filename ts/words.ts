@@ -500,7 +500,7 @@ const words9_pg15 = [
 	new Word("pitying", "жалость, испытывающий жалость"),
 ]
 
-const words_insects = [
+const words9_insects = [
 	new Word("scorpion", "скорпион"),
 	new Word("fly", "муха"),
 	new Word("dragonfly", "стрекоза"),
@@ -525,7 +525,7 @@ const words_insects = [
 	new Word("ladybird", "божья коровка"),
 ]
 
-const words_pg29 = [
+const words9_pg29 = [
 	new Word("aroma", "аромат"),
 	new Word("platter", "блюдо (большая тарелка)"),
 	new Word("common sight", "обычное зрелище"),
@@ -539,7 +539,47 @@ const words_pg29 = [
 	new Word("nutty taste", "ореховый вкус"),
 	new Word("abundant", "обильный"),
 	new Word(["fraction of the resources", "fraction of resources"], "доля ресурсов"),
-	new Word("cholesterol", "холестери"),
+	new Word("cholesterol", "холестерин"),
+]
+
+const words9_pg31 = [
+	new Word("colonise worlds", "колонизировать миры"),
+	new Word(["the other side of the galaxy", "other side of the galaxy",
+			  "the other side of galaxy", "other side of galaxy"], "другая часть галактики"),
+	new Word("levitate", "поднимать(ся)"),
+	new Word("wirelessly control video games", "беспроводное управлиние видео играми"),
+	new Word("mind control", "контроль сознания"),
+	new Word("severely disabled", "тяжелая инвалидность"),
+	new Word("paralysed", "парализованный"),
+	new Word("limbs", "конечности"),
+	new Word("hack into", "взломать"),
+	new Word("mind-boggling", "умопомрачительный"),
+	new Word("invisibility cloak", "плащ-невидимка"),
+	new Word("prototype", "прототип"),
+	new Word(["at a flick of a switch", "at flick of a switch",
+			  "at a flick of switch", "at flick of switch"], "по щелчку выключателя"),
+	new Word(["a desert mirage", "desert mirage"], "мираж в пустыне"),
+	new Word("illusion", "иллюзия"),
+	new Word("nanotube", "нанотрубка"),
+	new Word("nanotechnology", "нанотехнология"),
+	new Word("strands of threads", "пряди ниток"),
+	new Word("mouth-watering", "пальчики оближешь"),
+	new Word(["crack the secret", "crack secret"], "раскрыть секрет"),
+	new Word(["replicate a starter", "replicate starter"], "скопировать закуску"),
+	new Word("saliva", "слюна"),
+	new Word("far-fetched", "притянутый за уши, надуманный"),
+	new Word("circulating lasers", "вращающиеся лазеры"),
+	new Word("swirl space", "закружить пространство"),
+	new Word("stir milk into coffee", "размешивать молоко в кофе"),
+	new Word(["to step into the beam of light", "step into the beam of light",
+			  "to step into beam of light", "step into beam of light"], "шагнуть в луч света"),
+	new Word(["emerge in the past", "emerge in past"], "появиться в прошлом"),
+	new Word(["to be sceptical", "be sceptical"], "быть скептиком"),
+	new Word("brain signals", "сигналы мозга"),
+	new Word("facial movements", "движения лица"),
+	new Word("gaming industry", "игровая индустрия"),
+	new Word(["pay the price", "pay price"], "платить цену"),
+	new Word("main course", "основное блюдо"),
 ]
 
 // new Word(["", ""], ""),
@@ -564,9 +604,10 @@ const AllParts: Words[] = [
 	{ words: [], name: "9 Класс", blank: true },
 	{ words: words9_1, name: "Часть 1" },
 	{ words: words9_2, name: "Часть 2" },
-	{ words: words9_pg15, name: "Стр. 15" },
-	{ words: words_insects, name: "Насекомые" },
-	{ words: words_pg29, name: "Стр. 29" },
+	{ words: words9_pg15, name: "Стр. 15 (1e)" },
+	{ words: words9_insects, name: "Насекомые" },
+	{ words: words9_pg29, name: "Стр. 29 (2a)" },
+	{ words: words9_pg31, name: "Стр. 31 (2b)" },
 ]
 
 interface Words
