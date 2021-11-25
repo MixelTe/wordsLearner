@@ -66,6 +66,10 @@ function Div(classes?: string[] | string, children?: HTMLElement[], innerText?: 
 {
 	return initEl("div", classes, children, innerText, storeArray, index);
 }
+function Table(classes?: string[] | string, children?: HTMLElement[], storeArray?: any[], index?: number)
+{
+	return initEl("table", classes, children, undefined, storeArray, index);
+}
 function Span(classes?: string[] | string, children?: HTMLElement[], innerText?: string, storeArray?: any[], index?: number)
 {
 	return initEl("span", classes, children, innerText, storeArray, index);

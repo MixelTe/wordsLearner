@@ -47,10 +47,13 @@ function init()
 				// Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => history.back()),
 				Div("header-title-part", [], "Настройки")
 			]),
-			Div("settings-body", [
+			Div("page-body", [
 				Div("settings-block", [
 					Div("settings-text", [], "Слова:"),
 					Select("select", [], els, 9)
+				]),
+				Div("settings-block", [
+					Button([], "Посмотреть список слов", () => toPage(2))
 				]),
 				Div("settings-block", [
 					CheckBox("checkBox", settings.shuffle, undefined, undefined, "checkbox1", (inp) => setSetting("shuffle", inp.checked)),
@@ -66,6 +69,16 @@ function init()
 				]),
 			]),
 		], undefined, els, 8),
+		Div(["page", "page-3"], [
+			Div("header", [
+				Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => toPage(1)),
+				// Svg("btn-toPage", SVGs.backArrow.viewBox, SVGs.backArrow.paths, () => history.back()),
+				Div("header-title-part", [], "Список слов", els, 11)
+			]),
+			Div("page-body", [
+				Table("word-list", [], els, 12),
+			]),
+		], undefined, els, 10),
 	]);
 
 	els[4].spellcheck = false;
@@ -84,29 +97,62 @@ function init()
 		page2: {
 			page: <HTMLDivElement>els[8],
 			select: <HTMLSelectElement>els[9],
+		},
+		page3: {
+			page: <HTMLDivElement>els[10],
+			title: <HTMLDivElement>els[11],
+			wordsTable: <HTMLSelectElement>els[12],
 		}
 	}
 }
 function toPage(page: number)
 {
-	if (page == 0)
+	if (page == 1)
 	{
-		allEls.page1.page.classList.add("page-active");
+		allEls.page1.page.classList.remove("page-active");
+		allEls.page2.page.classList.add("page-active");
+		allEls.page3.page.classList.remove("page-active");
+	}
+	else if (page == 2)
+	{
+		allEls.page1.page.classList.remove("page-active");
 		allEls.page2.page.classList.remove("page-active");
-		reStart();
+		allEls.page3.page.classList.add("page-active");
+		showAllWords()
 	}
 	else
 	{
-		allEls.page2.page.classList.add("page-active");
-		allEls.page1.page.classList.remove("page-active");
+		allEls.page1.page.classList.add("page-active");
+		allEls.page2.page.classList.remove("page-active");
+		allEls.page3.page.classList.remove("page-active");
+		reStart();
 	}
 	history.pushState(page, "");
+}
+
+function showAllWords()
+{
+	if (settings.words == -1) settings.words = AllParts.length - 1;
+	const words = AllParts[settings.words].words;
+	const title = AllParts[settings.words].name;
+	allEls.page3.title.innerText = title;
+	allEls.page3.wordsTable.innerHTML = "";
+	for (let i = 0; i < words.length; i++)
+	{
+		const word = words[i];
+		const tr = initEl("tr", [], [
+			initEl("td", [], [], word.answer(), undefined, undefined),
+			initEl("td", [], [], word.question(), undefined, undefined),
+		], undefined, undefined, undefined)
+		allEls.page3.wordsTable.appendChild(tr);
+	}
 }
 
 function getPage()
 {
 	const currentState = history.state;
 	if (currentState == 1) return 1;
+	if (currentState == 2) return 2;
 	return 0;
 }
 
