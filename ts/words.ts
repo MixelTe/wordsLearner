@@ -146,10 +146,10 @@ const words3 = [
 	new Word("funeral", "похороны"),
 	new Word(["to hold a funeral", "hold a funeral", "to hold funeral", "hold funeral"], "проводить похороны", false),
 	new Word("dignity", "достоинство"),
-	new Word(["beneath one’s dignity", "beneath ones dignity"], "ниже чьего-то достоинства", false),
-	new Word(["to keep one’s dignity", "keep one’s dignity", "to keep ones dignity", "keep ones dignity"], "сохранить достоинство", false),
-	new Word(["to lose one’s dignity", "lose one’s dignity", "to lose ones dignity", "lose ones dignity"], "потерять достоинство", false),
-	new Word(["to stand on one’s dignity", "stand on one’s dignity", "to stand on ones dignity", "stand on ones dignity"], "держаться с большим достоинством", false),
+	new Word(["beneath one's dignity", "beneath ones dignity"], "ниже чьего-то достоинства", false),
+	new Word(["to keep one's dignity", "keep one's dignity", "to keep ones dignity", "keep ones dignity"], "сохранить достоинство", false),
+	new Word(["to lose one's dignity", "lose one's dignity", "to lose ones dignity", "lose ones dignity"], "потерять достоинство", false),
+	new Word(["to stand on one's dignity", "stand on one's dignity", "to stand on ones dignity", "stand on ones dignity"], "держаться с большим достоинством", false),
 	new Word("dignified", "полный достоинства, величавый"),
 ];
 const words4 = [
@@ -168,7 +168,7 @@ const words4 = [
 	new Word(["to express thanks", "express thanks"], "выразить благодарность", false),
 	new Word("nerve", "1. Нерв; 2. Смелость"),
 	new Word(["to suffer from nerves", "suffer from nerves"], "страдать от нервов", false),
-	new Word(["to get on one’s nerves", "get on one’s nerves",
+	new Word(["to get on one's nerves", "get on one's nerves",
 		"to get on ones nerves", "get on ones nerves"], "действовать кому-то на нервы", false),
 	new Word(["to have the nerve to do sth", "have the nerve to do sth",
 		"to have nerve to do sth", "have nerve to do sth"], "иметь смелость (решительность) что-то сделать", false),
@@ -625,6 +625,33 @@ const words9_pg36 = [
 	new Word(["to tear off", "tear off"], "отрывать"),
 ]
 
+const words9_pg68 = [
+	new Word("trout", "форель"),
+	new Word("sledging", "катание на санках"),
+	new Word("drill", "дрель/сверлить"),
+	new Word("bare hands", "голыми руками"),
+	new Word(["to squirming", "squirming"], "извиваться/корчиться"),
+	new Word(["keep a straight face", "keep straight face"], "сохранять невозмутимое выражение лица"),
+	new Word("situated", "расположенный"),
+	new Word("venue", "место встречи"),
+	new Word("commercially-manufactured", "промышленное производство"),
+	new Word("pond", "пруд"),
+	new Word(["cope with", "cope"], "справиться"),
+	new Word("in full swing", "в полном разгаре"),
+	new Word("elaborate", "замысловатый"),
+	new Word("sculpture", "скульптура"),
+	new Word("sculptor", "скульптор"),
+	new Word(["to illuminate", "illuminate"], "подсвечивать"),
+	new Word("maze", "лабиринт"),
+	new Word("thrill", "трепет"),
+	new Word("festival-goers", "посетитель фестиваля"),
+	new Word("snow rafting", "снежный рафтинг"),
+	new Word("sleigh ride", "катание на санях"),
+	new Word("banquet", "банкет"),
+	new Word("host", "хозяин"),
+	new Word("hot tub", "горячая ванна"),
+]
+
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -653,6 +680,7 @@ const AllParts: Words[] = [
 	{ words: words9_pg31, name: "Стр. 31 (2b)" },
 	{ words: words9_pg34, name: "Стр. 34 (2e)" },
 	{ words: words9_pg36, name: "Стр. 36 (2f)" },
+	{ words: words9_pg68, name: "Стр. 68 (4a)" },
 ]
 
 interface Words
