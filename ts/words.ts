@@ -652,6 +652,25 @@ const words9_pg68 = [
 	new Word("hot tub", "горячая ванна"),
 ]
 
+const words9_pg91 = [
+	new Word(["to cure", "cure"], "лечить"),
+	new Word("cancer", "рак"),
+	new Word("nanoparticle", "наночастица"),
+	new Word("tumour", "опухоль"),
+	new Word("tissue", "ткань"),
+	new Word("overwhelming", "подавляющий, ошеломляющий"),
+	new Word("stuffed animal", "чучело животного"),
+	new Word("hammer", "молоток, молот"),
+	new Word(["to come up with", "come up with"], "придумать"),
+	new Word("sweating", "потение, потеющий"),
+	new Word("evaporation", "испарение"),
+	new Word("cylinder", "цилиндер"),
+	new Word("wasteful", "расточительный"),
+	new Word("hygiene", "гигиена"),
+	new Word("chill", "холод, прохоладный"),
+	new Word("global", "глобальный"),
+]
+
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -681,6 +700,7 @@ const AllParts: Words[] = [
 	{ words: words9_pg34, name: "Стр. 34 (2e)" },
 	{ words: words9_pg36, name: "Стр. 36 (2f)" },
 	{ words: words9_pg68, name: "Стр. 68 (4a)" },
+	{ words: words9_pg91, name: "Стр. 91 (5b)" },
 ]
 
 interface Words
