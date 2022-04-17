@@ -671,6 +671,31 @@ const words9_pg91 = [
 	new Word("global", "глобальный"),
 ]
 
+const words9_pg110 = [
+	new Word("servant", "слуга"),
+	new Word("smooth-running", "плавная работа, плавный ход"),
+	new Word(["to hit a note", "hit a note", "to hit note", "hit note"], "попасть в ноты"),
+	new Word("tutor", "репетитор, наставник"),
+	new Word("possession", "владение"),
+	new Word("on behalf of", "от имени"),
+	new Word("in change of", "в изменении"),
+	new Word("overjoyed", "вне себя от радости"),
+	new Word("corset", "корсет"),
+	new Word(["to do the orders", "do the orders", "to do orders", "do orders"], "выполнять заказы/приказы"),
+	new Word("bookkeeping", "бугалтерия"),
+	new Word("stocktaking", "подведение итогов, инвентаризация"),
+	new Word(["to have a clue", "have a clue", "to have clue", "have clue"], "иметь представление"),
+	new Word(["to polish", "polish"], "полировать"),
+	new Word(["to intensify", "intensify"], "усилить"),
+	new Word(["to quit", "quit"], "покидать"),
+	new Word(["to enforce", "enforce"], "принуждать"),
+	new Word("code", "кодекс"),
+	new Word(["to be like a well-oiled machine", "be like a well-oiled machine",
+			  "to be like well-oiled machine", "be like well-oiled machine"], "быть как хорошо смазанная машина"),
+	new Word("engrossing", "захватывающий"),
+	new Word("cracked", "треснувший"),
+	new Word("filthy", "грязный"),
+]
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -701,6 +726,7 @@ const AllParts: Words[] = [
 	{ words: words9_pg36, name: "Стр. 36 (2f)" },
 	{ words: words9_pg68, name: "Стр. 68 (4a)" },
 	{ words: words9_pg91, name: "Стр. 91 (5b)" },
+	{ words: words9_pg110, name: "Стр. 110 (6b)" },
 ]
 
 interface Words
