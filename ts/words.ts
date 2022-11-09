@@ -696,6 +696,38 @@ const words9_pg110 = [
 	new Word("cracked", "треснувший"),
 	new Word("filthy", "грязный"),
 ]
+
+const words10_pg36 = [
+	new Word(["a lively teenager", "lively teenager"], "оживленный подросток"),
+	new Word("her behaviour started to change", "ее поведение начало меняться"),
+	new Word("hardly ate anything", "почти ничего не ел"),
+	new Word("burst into tears", "разрыдаться"),
+	new Word("skinny and pale", "худой и бледный"),
+	new Word("enraged by the slightest thing", "бесится по малейшему поводу"),
+	new Word("distorted body image", "искаженное представление о теле"),
+	new Word("lack of self-esteem", "неуверенность в себе"),
+	new Word("urgent medical attention", "срочная медицинская помощь"),
+	new Word("weight back to normal", "вес пришел в норму"),
+	new Word("colour returned to her cheeks", "цвет вернулся к ее щекам"),
+	new Word("sullen", "угрюмый"),
+	new Word("withdrawn", "ушедший в себя"),
+	new Word("convinced", "убежденный"),
+	new Word("enraged", "разъяренный"),
+	new Word("initial", "исходный, первоначальный"),
+	new Word("tactics", "тактика"),
+	new Word("distorted", "искаженный"),
+	new Word("glamour", "очарование"),
+	new Word("severe", "тяжелый, серьезный"),
+	new Word("tearful", "слезливый"),
+	new Word("underlying", "лежащий в основе, основной"),
+	new Word("vibrant", "полный энергии и энтузиазма"),
+	new Word("eating disorder", "Расстройство пищевого поведения"),
+	new Word(["to equate thinness with beauty", "equate thinness with beauty"], "Приравнивать худобу к красоте"),
+	new Word("glossy magazines", "глянцевые журналы"),
+	new Word("light snacks", "легкие закуски"),
+	new Word("mood swings", "перепады настроения"),
+	new Word("scared to death", "напуган до смерти"),
+]
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -727,6 +759,8 @@ const AllParts: Words[] = [
 	{ words: words9_pg68, name: "Стр. 68 (4a)" },
 	{ words: words9_pg91, name: "Стр. 91 (5b)" },
 	{ words: words9_pg110, name: "Стр. 110 (6b)" },
+	{ words: [], name: "10 Класс", blank: true },
+	{ words: words10_pg36, name: "Стр. 36-37" },
 ]
 
 interface Words
