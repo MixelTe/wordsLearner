@@ -728,6 +728,26 @@ const words10_pg36 = [
 	new Word("mood swings", "перепады настроения"),
 	new Word("scared to death", "напуган до смерти"),
 ]
+
+const words10_pg100 = [
+	new Word("tornado", "торнадо"),
+	new Word("tsunami", "цунами"),
+	new Word("avalanche", "лавина"),
+	new Word("flood", "наводнение"),
+	new Word("volcanic eruption", "извержение вулкана"),
+	new Word("sandstorm", "песчаная буря"),
+	new Word("cyclone", "циклон"),
+	new Word("lightning strike", "удар молнии"),
+	new Word("earthquake", "землетрясение"),
+	new Word("blizzard", "метель"),
+	new Word("drought", "засуха"),
+	new Word("hailstorm", "ливень с градом"),
+	new Word("hurricane", "ураган"),
+	new Word("thunderstorm", "гроза"),
+	new Word("forest fire", "лесной пожар"),
+	new Word("heatwave", "тепловая волна, жара"),
+]
+
 // new Word(["", ""], ""),
 // new Word("", ""),
 
@@ -761,6 +781,7 @@ const AllParts: Words[] = [
 	{ words: words9_pg110, name: "Стр. 110 (6b)" },
 	{ words: [], name: "10 Класс", blank: true },
 	{ words: words10_pg36, name: "Стр. 36-37" },
+	{ words: words10_pg100, name: "Стр. 100" },
 ]
 
 interface Words
