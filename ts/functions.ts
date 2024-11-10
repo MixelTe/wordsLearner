@@ -5,8 +5,8 @@ const SVGs = {
 			"m12 17c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5zm0-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z"
 	]},
 	backArrow: {
-		viewBox: "0 0 459 459", paths: [
-			"M178.5,140.25v-102L0,216.75l178.5,178.5V290.7c127.5,0,216.75,40.8,280.5,130.05C433.5,293.25,357,165.75,178.5,140.25z"
+		viewBox: "0 0 45.58 45.58", paths: [
+			"M45.506,33.532c-1.741-7.42-7.161-17.758-23.554-19.942V7.047c0-1.364-0.826-2.593-2.087-3.113 c-1.261-0.521-2.712-0.229-3.675,0.737L1.305,19.63c-1.739,1.748-1.74,4.572-0.001,6.32L16.19,40.909 c0.961,0.966,2.415,1.258,3.676,0.737c1.261-0.521,2.087-1.75,2.087-3.113v-6.331c5.593,0.007,13.656,0.743,19.392,4.313 c0.953,0.594,2.168,0.555,3.08-0.101C45.335,35.762,45.763,34.624,45.506,33.532z"
 		]
 	},
 }
@@ -23,6 +23,10 @@ function shuffle(array: any[])
 function normalizeString(str: string)
 {
 	return str.toLowerCase().replace(/  +/g, ' ').trim();
+}
+function titleCase(str: string)
+{
+	return str[0].toUpperCase() + str.slice(1);
 }
 
 
@@ -80,12 +84,12 @@ function H1(classes?: string[] | string, children?: HTMLElement[], innerText?: s
 }
 function CheckBox(classes?: string[] | string, checked?: boolean, storeArray?: any[], index?: number, id?: string, onChange?: (inp: HTMLInputElement) => void)
 {
-	const input = initEl("input", classes, undefined, undefined, storeArray, index);
+	const input = initEl("input", undefined, undefined, undefined, storeArray, index);
 	input.type = "checkbox";
 	if (checked) input.checked = checked;
 	if (id) input.setAttribute("id", id);
 	if (onChange) input.addEventListener("change", onChange.bind(undefined, input));
-	return input;
+	return Span(classes, [input, Span()]);
 }
 function Input(classes?: string[] | string, type?: string, placeholder?: string, storeArray?: any[], index?: number, id?: string, onChange?: (inp: HTMLInputElement) => void)
 {

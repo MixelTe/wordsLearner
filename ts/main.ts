@@ -11,8 +11,8 @@ window.addEventListener("keypress", (e) =>
 window.addEventListener("popstate", (e) =>
 {
 	const state = e.state;
-	if (typeof state == "number") toPage(state);
-	if (state == null) toPage(0);
+	if (typeof state == "number") toPage(state, false);
+	if (state == null) toPage(0, false);
 });
 
 function init()
@@ -56,15 +56,15 @@ function init()
 					Button([], "Посмотреть список слов", () => toPage(2))
 				]),
 				Div("settings-block", [
-					CheckBox("checkBox", settings.shuffle, undefined, undefined, "checkbox1", (inp) => setSetting("shuffle", inp.checked)),
+					CheckBox("checkbox", settings.shuffle, undefined, undefined, "checkbox1", (inp) => setSetting("shuffle", inp.checked)),
 					Label("settings-text", [], "Перемешивать слова", undefined, undefined, "checkbox1"),
 				]),
+				// Div("settings-block", [
+				// 	CheckBox("checkbox", settings.onlyMain, undefined, undefined, "checkbox2", (inp) => setSetting("onlyMain", inp.checked)),
+				// 	Label("settings-text", [], "Только главные слова", undefined, undefined, "checkbox2"),
+				// ]),
 				Div("settings-block", [
-					CheckBox("checkBox", settings.onlyMain, undefined, undefined, "checkbox2", (inp) => setSetting("onlyMain", inp.checked)),
-					Label("settings-text", [], "Только главные слова", undefined, undefined, "checkbox2"),
-				]),
-				Div("settings-block", [
-					CheckBox("checkBox", settings.repeatMode, undefined, undefined, "checkbox3", (inp) => setSetting("repeatMode", inp.checked)),
+					CheckBox("checkbox", settings.repeatMode, undefined, undefined, "checkbox3", (inp) => setSetting("repeatMode", inp.checked)),
 					Label("settings-text", [], "Режим заучивания", undefined, undefined, "checkbox3"),
 				]),
 			]),
@@ -105,7 +105,7 @@ function init()
 		}
 	}
 }
-function toPage(page: number)
+function toPage(page: number, pushState = true)
 {
 	if (page == 1)
 	{
@@ -127,7 +127,8 @@ function toPage(page: number)
 		allEls.page3.page.classList.remove("page-active");
 		reStart();
 	}
-	history.pushState(page, "");
+	if (pushState)
+		history.pushState(page, "");
 }
 
 function showAllWords()
@@ -159,7 +160,7 @@ function getPage()
 function restoreSettings()
 {
 	const settings = <Settings>{
-		shuffle: getBoolFromLS("shuffle", false),
+		shuffle: getBoolFromLS("shuffle", true),
 		onlyMain: getBoolFromLS("onlyMain", false),
 		repeatMode: getBoolFromLS("repeatMode", false),
 		words: getIntFromLS("words", -1),

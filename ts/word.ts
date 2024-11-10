@@ -15,7 +15,7 @@ class Word
 			const w = this.words[i];
 			this.words[i] = normalizeString(w);
 		}
-		this.translate = translate;
+		this.translate = titleCase(translate);
 		this.main = main;
 	}
 
