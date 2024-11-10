@@ -123,6 +123,7 @@ function toPage(page, pushState = true) {
     }
     if (pushState)
         history.pushState(page, "");
+    yaHit(window.location.href);
 }
 function showAllWords() {
     if (settings.words == -1)
@@ -217,4 +218,16 @@ function setSelect() {
         url.searchParams.set("w", `${AllParts[settings.words].id}`);
         history.replaceState(1, "", url.toString());
     });
+}
+function yaReachGoal(goal) {
+    try {
+        window.ym(98877166, "reachGoal", goal);
+    }
+    catch (e) { }
+}
+function yaHit(url) {
+    try {
+        ym(96633773, "hit", url);
+    }
+    catch (e) { }
 }
