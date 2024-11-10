@@ -130,6 +130,7 @@ function toPage(page: number, pushState = true)
 	}
 	if (pushState)
 		history.pushState(page, "");
+	yaHit(window.location.href);
 }
 
 function showAllWords()
@@ -229,6 +230,23 @@ function setSelect()
 		url.searchParams.set("w", `${AllParts[settings.words].id}`);
 		history.replaceState(1, "", url.toString());
 	});
+}
+
+function yaReachGoal(goal: string)
+{
+    try
+    {
+        window.ym(98877166, "reachGoal", goal)
+    }
+    catch (e) { }
+}
+function yaHit(url: string)
+{
+    try
+    {
+        ym(96633773, "hit", url);
+    }
+    catch (e) { }
 }
 
 interface Settings

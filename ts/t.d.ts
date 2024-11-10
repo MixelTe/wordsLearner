@@ -1,0 +1,1 @@
+declare function ym(id: number, v1: string, v2: string): void

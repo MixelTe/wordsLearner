@@ -117,6 +117,7 @@ class Tester
 		else allEls.page1.answer.innerText = `Правильно: ${Math.round(this.correct / this.words.length * 100)}%`;
 		allEls.page1.button.innerText = "Again";
 		this.state = "result";
+		yaReachGoal("block_end");
 	}
 	private restart()
 	{
