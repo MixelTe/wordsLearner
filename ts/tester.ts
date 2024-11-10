@@ -5,6 +5,11 @@ function reStart()
 	if (settings.words == -1) settings.words = AllParts.length - 1;
 	allEls.page1.title.innerText = AllParts[settings.words].name;
 	curTester = new Tester(AllParts[settings.words].words);
+
+	document.title = "Words Learner | " + AllParts[settings.words].name;
+	const url = new URL(window.location.href);
+	url.searchParams.set("w", `${AllParts[settings.words].id}`);
+	history.replaceState(0, "", url.toString());
 }
 function onOKButton()
 {
@@ -120,7 +125,8 @@ class Tester
 	}
 	public onOKButton()
 	{
-		switch (this.state) {
+		switch (this.state)
+		{
 			case "question": this.checkAnswer(); break;
 			case "answer": this.showQuestion(); break;
 			case "result": this.restart(); break;

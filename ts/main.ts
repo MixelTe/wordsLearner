@@ -107,6 +107,7 @@ function init()
 }
 function toPage(page: number, pushState = true)
 {
+	document.title = "Words Learner | " + AllParts[settings.words].name
 	if (page == 1)
 	{
 		allEls.page1.page.classList.remove("page-active");
@@ -163,10 +164,16 @@ function restoreSettings()
 		shuffle: getBoolFromLS("shuffle", true),
 		onlyMain: getBoolFromLS("onlyMain", false),
 		repeatMode: getBoolFromLS("repeatMode", false),
-		words: getIntFromLS("words", -1),
+		words: getWordsFromParams(),
 		maxWords: getIntFromLS("maxWords", -1),
 	}
 	return settings;
+}
+function getWordsFromParams()
+{
+	const url = new URL(window.location.href);
+	const w = url.searchParams.get("w");
+	return AllParts.findIndex(v => v.id == w);
 }
 function getBoolFromLS(key: string, def: boolean)
 {
@@ -214,8 +221,13 @@ function setSelect()
 	select.value = `${settings.words}`;
 	select.addEventListener("change", () =>
 	{
-		localStorage.setItem(prefix + "words", `${select.value}`);
+		// localStorage.setItem(prefix + "words", `${select.value}`);
 		settings.words = parseInt(select.value);
+		document.title = "Words Learner | " + AllParts[settings.words].name
+
+		const url = new URL(window.location.href);
+		url.searchParams.set("w", `${AllParts[settings.words].id}`);
+		history.replaceState(1, "", url.toString());
 	});
 }
 
