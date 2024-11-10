@@ -233,3 +233,13 @@ body {
 	border-spacing: 1em 0.7em;
 	font-size: large;
 }
+
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-thumb {
+	background-color: darkgreen;
+	border-radius: 4px;
+}
