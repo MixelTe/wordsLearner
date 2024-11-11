@@ -204,7 +204,7 @@ function setSelect() {
     }
     const maxWords = AllParts.length - 1;
     const curPart = settings.words;
-    if (curPart == -1 || settings.maxWords < maxWords)
+    if (curPart == -1)
         settings.words = maxWords;
     localStorage.setItem(prefix + "maxWords", `${maxWords}`);
     if (curPart != -1)
