@@ -806,7 +806,7 @@ const words1_theme2_1 = [
     new Word("conversion course", "курс переподготовки"),
     new Word("employment", "трудоустройство"),
     new Word("experience", "опыт"),
-    new Word(["FE (Further education) college", "FE college"], "колледж профессионального образования"),
+    new Word(["FE (Further education) college", "FE college", "further education college"], "колледж профессионального образования"),
     new Word(["to apply for (to)", "apply for (to)", "to apply for", "apply for", "to apply to", "apply to"], "подать заявление, записаться"),
     new Word(["to award", "award"], "присвоить. присудить"),
     new Word(["to be referred to as", "be referred to as"], "называться"),
