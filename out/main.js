@@ -153,7 +153,7 @@ function restoreSettings() {
     const settings = {
         shuffle: getBoolFromLS("shuffle", true),
         onlyMain: getBoolFromLS("onlyMain", false),
-        repeatMode: getBoolFromLS("repeatMode", true),
+        repeatMode: getBoolFromLS("repeatMode", false),
         words: getWordsFromParams(),
         maxWords: getIntFromLS("maxWords", -1),
     };
