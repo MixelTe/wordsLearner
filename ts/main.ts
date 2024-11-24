@@ -164,7 +164,7 @@ function restoreSettings()
 	const settings = <Settings>{
 		shuffle: getBoolFromLS("shuffle", true),
 		onlyMain: getBoolFromLS("onlyMain", false),
-		repeatMode: getBoolFromLS("repeatMode", false),
+		repeatMode: getBoolFromLS("repeatMode", true),
 		words: getWordsFromParams(),
 		maxWords: getIntFromLS("maxWords", -1),
 	}
