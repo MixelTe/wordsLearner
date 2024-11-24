@@ -18,14 +18,16 @@ function onOKButton()
 
 class Tester
 {
-	private words: Word[];
+	private words: Word[] = [];
+	private wordsAll: Word[] = [];
 	private curWord = 0;
 	private correct = 0;
+	private errors: number[] = [];
 	private state: "question" | "answer" | "result" | "none" = "none";
 	private firstTry = true;
 	constructor(words: Word[])
 	{
-		this.words = words;
+		this.wordsAll = words.slice();
 		this.init(words);
 		this.showQuestion();
 	}
@@ -35,20 +37,12 @@ class Tester
 		this.correct = 0;
 		this.firstTry = true;
 		this.state = "none";
-		this.words = words;
+		this.words = words.slice();
+		this.errors = [];
 		if (settings.onlyMain)
-		{
-			this.words = [];
-			words.forEach(w =>
-			{
-				if (w.isMain()) this.words.push(w);
-			});
-		}
+			this.words = words.filter(w => w.isMain());
 		if (settings.shuffle)
-		{
-			this.words = words.slice();
 			shuffle(this.words);
-		}
 	}
 	private setLabels()
 	{
@@ -90,6 +84,7 @@ class Tester
 			}
 			else
 			{
+				this.errors.push(this.curWord);
 				this.firstTry = false;
 			}
 		}
@@ -121,7 +116,13 @@ class Tester
 	}
 	private restart()
 	{
-		this.init(this.words);
+		let words = this.wordsAll;
+		if (settings.repeatMode)
+		{
+			words = this.errors.map(i => this.words[i]);
+			if (words.length == 0) words = this.wordsAll;
+		}
+		this.init(words);
 		this.showQuestion();
 	}
 	public onOKButton()

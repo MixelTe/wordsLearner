@@ -4,6 +4,7 @@ const allEls = init();
 
 setSelect();
 toPage(getPage());
+reStart();
 window.addEventListener("keypress", (e) =>
 {
 	if (e.key == "Enter" && e.target != allEls.page1.button) onOKButton();
@@ -126,7 +127,6 @@ function toPage(page: number, pushState = true)
 		allEls.page1.page.classList.add("page-active");
 		allEls.page2.page.classList.remove("page-active");
 		allEls.page3.page.classList.remove("page-active");
-		reStart();
 	}
 	if (pushState)
 		history.pushState(page, "");
@@ -194,6 +194,7 @@ function setSetting(setting: keyof Settings, v: any)
 	settings[setting] = <never>v;
 	if (typeof v == "boolean") localStorage.setItem(prefix + setting, `${v ? 1 : 0}`);
 	else localStorage.setItem(prefix + setting, `${v}`);
+	reStart();
 }
 function setSelect()
 {
@@ -229,6 +230,7 @@ function setSelect()
 		const url = new URL(window.location.href);
 		url.searchParams.set("w", `${AllParts[settings.words].id}`);
 		history.replaceState(1, "", url.toString());
+		reStart();
 	});
 }
 
