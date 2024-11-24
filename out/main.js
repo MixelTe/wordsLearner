@@ -4,6 +4,7 @@ const settings = restoreSettings();
 const allEls = init();
 setSelect();
 toPage(getPage());
+reStart();
 window.addEventListener("keypress", (e) => {
     if (e.key == "Enter" && e.target != allEls.page1.button)
         onOKButton();
@@ -119,7 +120,6 @@ function toPage(page, pushState = true) {
         allEls.page1.page.classList.add("page-active");
         allEls.page2.page.classList.remove("page-active");
         allEls.page3.page.classList.remove("page-active");
-        reStart();
     }
     if (pushState)
         history.pushState(page, "");
@@ -153,7 +153,7 @@ function restoreSettings() {
     const settings = {
         shuffle: getBoolFromLS("shuffle", true),
         onlyMain: getBoolFromLS("onlyMain", false),
-        repeatMode: getBoolFromLS("repeatMode", false),
+        repeatMode: getBoolFromLS("repeatMode", true),
         words: getWordsFromParams(),
         maxWords: getIntFromLS("maxWords", -1),
     };
@@ -183,6 +183,7 @@ function setSetting(setting, v) {
         localStorage.setItem(prefix + setting, `${v ? 1 : 0}`);
     else
         localStorage.setItem(prefix + setting, `${v}`);
+    reStart();
 }
 function setSelect() {
     const select = allEls.page2.select;
@@ -217,6 +218,7 @@ function setSelect() {
         const url = new URL(window.location.href);
         url.searchParams.set("w", `${AllParts[settings.words].id}`);
         history.replaceState(1, "", url.toString());
+        reStart();
     });
 }
 function yaReachGoal(goal) {

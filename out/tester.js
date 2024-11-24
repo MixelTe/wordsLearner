@@ -15,13 +15,15 @@ function onOKButton() {
         curTester.onOKButton();
 }
 class Tester {
-    words;
+    words = [];
+    wordsAll = [];
     curWord = 0;
     correct = 0;
+    errors = [];
     state = "none";
     firstTry = true;
     constructor(words) {
-        this.words = words;
+        this.wordsAll = words.slice();
         this.init(words);
         this.showQuestion();
     }
@@ -30,18 +32,12 @@ class Tester {
         this.correct = 0;
         this.firstTry = true;
         this.state = "none";
-        this.words = words;
-        if (settings.onlyMain) {
-            this.words = [];
-            words.forEach(w => {
-                if (w.isMain())
-                    this.words.push(w);
-            });
-        }
-        if (settings.shuffle) {
-            this.words = words.slice();
+        this.words = words.slice();
+        this.errors = [];
+        if (settings.onlyMain)
+            this.words = words.filter(w => w.isMain());
+        if (settings.shuffle)
             shuffle(this.words);
-        }
     }
     setLabels() {
         allEls.page1.all.innerText = `${this.curWord} / ${this.words.length}`;
@@ -79,6 +75,7 @@ class Tester {
                 this.curWord += 1;
             }
             else {
+                this.errors.push(this.curWord);
                 this.firstTry = false;
             }
         }
@@ -112,7 +109,13 @@ class Tester {
         yaReachGoal("block_end");
     }
     restart() {
-        this.init(this.words);
+        let words = this.wordsAll;
+        if (settings.repeatMode) {
+            words = this.errors.map(i => this.words[i]);
+            if (words.length == 0)
+                words = this.wordsAll;
+        }
+        this.init(words);
         this.showQuestion();
     }
     onOKButton() {
