@@ -19,7 +19,7 @@ class Tester {
     wordsAll = [];
     curWord = 0;
     correct = 0;
-    errors = [];
+    errors = new Set();
     state = "none";
     firstTry = true;
     constructor(words) {
@@ -33,7 +33,7 @@ class Tester {
         this.firstTry = true;
         this.state = "none";
         this.words = words.slice();
-        this.errors = [];
+        this.errors = new Set();
         if (settings.onlyMain)
             this.words = words.filter(w => w.isMain());
         if (settings.shuffle)
@@ -75,7 +75,7 @@ class Tester {
                 this.curWord += 1;
             }
             else {
-                this.errors.push(this.curWord);
+                this.errors.add(this.curWord);
                 this.firstTry = false;
             }
         }
@@ -111,7 +111,7 @@ class Tester {
     restart() {
         let words = this.wordsAll;
         if (settings.repeatMode) {
-            words = this.errors.map(i => this.words[i]);
+            words = this.errors.entries().map(i => this.words[i[0]]).toArray();
             if (words.length == 0)
                 words = this.wordsAll;
         }
