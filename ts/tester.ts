@@ -119,7 +119,7 @@ class Tester
 		let words = this.wordsAll;
 		if (settings.repeatMode)
 		{
-			words = this.errors.entries().map(i => this.words[i[0]]).toArray();
+			words = Array.from(this.errors.entries()).map(v => this.words[v[0]]);
 			if (words.length == 0) words = this.wordsAll;
 		}
 		this.init(words);
